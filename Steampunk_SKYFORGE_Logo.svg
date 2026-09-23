@@ -1,0 +1,19 @@
+<svg viewBox="0 0 780 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Steampunk SKYFORGE logo">
+  <rect x="3" y="3" width="774" height="234" rx="18" fill="#17110c" stroke="#d9a441" stroke-width="6"/>
+  <rect x="14" y="14" width="752" height="212" rx="12" fill="none" stroke="#6b4a22" stroke-width="2" stroke-dasharray="2 7"/>
+  <svg x="18" y="10" width="220" height="220" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Steampunk SKYFORGE emblem">
+  <defs><linearGradient id="logo-brass" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f0c56a"/><stop offset=".55" stop-color="#d9a441"/><stop offset="1" stop-color="#8a6420"/></linearGradient></defs>
+  <path d="M120.00,26.00 L127.03,8.22 L141.85,10.15 L144.09,29.14 L155.97,33.16 L169.27,19.42 L182.22,26.88 L177.03,45.28 L186.47,53.53 L204.01,45.93 L213.12,57.78 L201.28,72.79 L206.84,84.03 L225.96,83.72 L229.85,98.15 L213.16,107.49 L214.00,120.00 L231.78,127.03 L229.85,141.85 L210.86,144.09 L206.84,155.97 L220.58,169.27 L213.12,182.22 L194.72,177.03 L186.47,186.47 L194.07,204.01 L182.22,213.12 L167.21,201.28 L155.97,206.84 L156.28,225.96 L141.85,229.85 L132.51,213.16 L120.00,214.00 L112.97,231.78 L98.15,229.85 L95.91,210.86 L84.03,206.84 L70.73,220.58 L57.78,213.12 L62.97,194.72 L53.53,186.47 L35.99,194.07 L26.88,182.22 L38.72,167.21 L33.16,155.97 L14.04,156.28 L10.15,141.85 L26.84,132.51 L26.00,120.00 L8.22,112.97 L10.15,98.15 L29.14,95.91 L33.16,84.03 L19.42,70.73 L26.88,57.78 L45.28,62.97 L53.53,53.53 L45.93,35.99 L57.78,26.88 L72.79,38.72 L84.03,33.16 L83.72,14.04 L98.15,10.15 L107.49,26.84 Z" fill="url(#logo-brass)" stroke="#2b1d12" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="120" cy="120" r="80" fill="#17110c" stroke="#6b4a22" stroke-width="5"/>
+  <circle cx="181.82" cy="136.56" r="3.2" fill="#d9a441"/><circle cx="165.25" cy="165.25" r="3.2" fill="#d9a441"/><circle cx="136.56" cy="181.82" r="3.2" fill="#d9a441"/><circle cx="103.44" cy="181.82" r="3.2" fill="#d9a441"/><circle cx="74.75" cy="165.25" r="3.2" fill="#d9a441"/><circle cx="58.18" cy="136.56" r="3.2" fill="#d9a441"/><circle cx="58.18" cy="103.44" r="3.2" fill="#d9a441"/><circle cx="74.75" cy="74.75" r="3.2" fill="#d9a441"/><circle cx="103.44" cy="58.18" r="3.2" fill="#d9a441"/><circle cx="136.56" cy="58.18" r="3.2" fill="#d9a441"/><circle cx="165.25" cy="74.75" r="3.2" fill="#d9a441"/><circle cx="181.82" cy="103.44" r="3.2" fill="#d9a441"/>
+  <polygon points="120.00,76.00 158.11,98.00 158.11,142.00 120.00,164.00 81.89,142.00 81.89,98.00" fill="none" stroke="#e8641c" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="120,100 139,110 120,120 101,110" fill="#ffd84a" stroke="#2b1d12" stroke-width="2.5" stroke-linejoin="round"/>
+  <polygon points="101,110 120,120 120,142 101,132" fill="#f5c400" stroke="#2b1d12" stroke-width="2.5" stroke-linejoin="round"/>
+  <polygon points="139,110 120,120 120,142 139,132" fill="#c99a00" stroke="#2b1d12" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M156 58 q10 -12 22 -6 q10 -14 24 -2" fill="none" stroke="#f3e6c8" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+</svg>
+  <text x="262" y="98" style='font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif' font-size="44" font-weight="700" textLength="470" lengthAdjust="spacingAndGlyphs" fill="#e8641c">STEAMPUNK</text>
+  <text x="258" y="184" style='font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif' font-size="96" font-weight="700" textLength="492" lengthAdjust="spacingAndGlyphs" fill="#f3e6c8" stroke="#8a6420" stroke-width="2" paint-order="stroke">SKYFORGE</text>
+  <text x="264" y="214" style='font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif' font-size="17" textLength="470" lengthAdjust="spacingAndGlyphs" fill="#d9a441">MOCK FRC GAME · THEME EDITION</text>
+</svg>

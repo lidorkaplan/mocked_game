@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Memo – SKYLINE / Steampunk SKYFORGE</title>
+<style>
+  :root { --ink:#1f2937; --muted:#6b7280; --line:#cbd5e1; --accent:#b45309; --red:#d62828; --blue:#1d4ed8; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f3f4f6; color:var(--ink); font:15px/1.55 "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width:900px; margin:0 auto; background:#fff; padding:40px 52px 64px; }
+  header { border-bottom:3px solid var(--ink); padding-bottom:12px; margin-bottom:8px; }
+  h1 { margin:0; font-size:28px; }
+  .meta { color:var(--muted); font-size:13px; margin-top:4px; }
+  h2 { margin-top:34px; font-size:20px; border-bottom:1px solid var(--line); padding-bottom:3px; }
+  h3 { margin:20px 0 6px; font-size:16px; }
+  table { border-collapse:collapse; width:100%; margin:10px 0 16px; font-size:13.5px; }
+  th, td { border:1px solid var(--line); padding:5px 8px; text-align:left; vertical-align:top; }
+  th { background:#e5e7eb; }
+  .tldr { background:#fff7ed; border-left:5px solid var(--accent); padding:10px 16px; margin:16px 0; }
+  .tldr ul { margin:6px 0 0; padding-left:20px; }
+  .hyp { background:#eef2ff; border-left:5px solid #6366f1; padding:8px 14px; margin:12px 0; font-size:14px; }
+  figure { margin:14px 0 20px; text-align:center; }
+  figure svg { width:100%; max-width:760px; height:auto; border:1px solid #e5e7eb; }
+  figcaption { font-size:12.5px; color:var(--muted); margin-top:4px; }
+  a { color:#1d4ed8; }
+  .red { color:var(--red); font-weight:600; } .blue { color:var(--blue); font-weight:600; }
+  @media (max-width:640px) { main { padding:24px 18px 40px; } table { font-size:12.5px; display:block; overflow-x:auto; } }
+  @media print { body { background:#fff; } main { padding:0; max-width:none; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Design Memo – the logic behind SKYLINE</h1>
+  <div class="meta">Mock FRC game · published as the theme edition <b>Steampunk SKYFORGE</b> · 2026-09-23 ·
+    Companion to the <a href="Steampunk_SKYFORGE_Game_Manual.html">Steampunk SKYFORGE manual</a> (<a href="Steampunk_SKYFORGE_Game_Manual.pdf">PDF</a>) and <a href="Steampunk_SKYFORGE_Field_3D.html">3D field</a></div>
+</header>
+
+<div class="tldr"><b>In one paragraph.</b> SKYLINE is a game about <b>height as a design choice</b>. Every decision was tuned so that
+no single robot architecture does everything well. A short robot (≤ 32 in.) owns the space under the floating boards, the low goal and a cheap endgame. A tall robot owns the high goals and the hang. A shooter owns the vertical goal. The best alliance has to combine them. The field adds a second axis, <b>near vs far</b>: cheap goals sit near home, while the valuable goals and the vertical-goal RP sit in the opponent's half, behind an opponent-owned blocker.
+  <ul>
+    <li>Core trade-off: <b>go under or go tall</b> (32 in. board clearance between GOAL 1 and GOAL 2 placement heights).</li>
+    <li>Core tension: <b>safe and slow near home vs valuable and contested far away</b>.</li>
+    <li>RPs reward <b>breadth</b> (all three levels), <b>shooting</b> (vertical goal) and <b>mixed endgames</b> (1 HANG + 1 UNDER is enough).</li>
+  </ul>
+</div>
+
+<h2>1 Where the design came from</h2>
+<table>
+  <tr><th style="width:30%">Input</th><th>How it shaped the game</th></tr>
+  <tr><td>Your sketch and brief</td><td>Layout, goal ownership and colours, three goal heights, hexagonal vertical goal with the opponent's GOAL 1 as blocker, human-player points, floating boards, safe zone, cube game piece, AUTO = TELEOP points, RP structure, and "only 2 cubes above GOAL 3" height rule.</td></tr>
+  <tr><td>2025 REEFSCAPE manual</td><td>Match timing, foul values (2 / 6), cards, robot construction and bumper rules, conduct rules, protected-zone and cage-protection patterns, ranking structure. Inherited wherever the game didn't need something new.</td></tr>
+  <tr><td>2019 DESTINATION: DEEP SPACE manual</td><td>The "duck in the zone" height-limit idea (2019 G12), reused as G416 for the opponent's launch zone.</td></tr>
+  <tr><td>FTC RELIC RECOVERY glyph</td><td>The game piece concept (solid foam cube), scaled to 9 in. so an FRC robot carries about 4.</td></tr>
+</table>
+<p>Two principles guided every choice: <b>don't add rules the game doesn't need</b> (inherit 2025 by default), and <b>make each capability cost something</b>, so that choosing a robot architecture is a real strategic decision.</p>
+
+<h2>2 What the game rewards (theme of play)</h2>
+<p>The name SKYLINE describes the silhouette: goals of three heights along one wall, a vertical goal raised above the alliance wall, and boards floating above the carpet. The game's incentives follow the same vertical logic.</p>
+
+<h3>2.1 The height ladder – every number is a decision boundary</h3>
+<figure>
+<svg viewBox="0 0 760 330" role="img" aria-label="Height ladder">
+  <line x1="60" y1="310" x2="740" y2="310" stroke="#111" stroke-width="1.5"/>
+  <text x="50" y="314" font-size="11" text-anchor="end">0 in.</text>
+  <g font-size="11">
+    <line x1="60" y1="256" x2="740" y2="256" stroke="#d62828" stroke-dasharray="4 3"/><text x="50" y="260" text-anchor="end">18</text><text x="70" y="252" fill="#d62828">GOAL 1 rim · placing needs cube top ≈ 27 in.</text>
+    <line x1="60" y1="214" x2="740" y2="214" stroke="#059669" stroke-width="2"/><text x="50" y="218" text-anchor="end">32</text><text x="70" y="210" fill="#047857" font-weight="700">FLOATING BOARD clearance – the split between "low" and "tall" robots</text>
+    <line x1="60" y1="196" x2="740" y2="196" stroke="#d62828" stroke-dasharray="4 3"/><text x="50" y="200" text-anchor="end">38</text><text x="540" y="207" fill="#d62828">GOAL 2 rim · placing needs ≈ 47 in.</text>
+    <line x1="60" y1="184" x2="740" y2="184" stroke="#6b7280" stroke-dasharray="2 3"/><text x="50" y="188" text-anchor="end">42</text><text x="70" y="180" fill="#374151">start height (2025 R104)</text>
+    <line x1="60" y1="166" x2="740" y2="166" stroke="#b45309" stroke-dasharray="2 3"/><text x="50" y="170" text-anchor="end">48</text><text x="70" y="162" fill="#b45309">max height in opponent's LAUNCH ZONE (G416)</text>
+    <line x1="60" y1="130" x2="740" y2="130" stroke="#111" stroke-width="1.5"/><text x="50" y="134" text-anchor="end">60</text><text x="70" y="126">GOAL 3 rim = VERTICAL GOAL bottom</text>
+    <line x1="60" y1="76" x2="740" y2="76" stroke="#b91c1c" stroke-width="2"/><text x="50" y="80" text-anchor="end">78</text><text x="70" y="72" fill="#b91c1c" font-weight="700">max ROBOT height = 60 + 2 × 9 in. cubes (your "2 cubes above GOAL 3" rule)</text>
+    <line x1="60" y1="26" x2="740" y2="26" stroke="#1d4ed8" stroke-dasharray="4 3"/><text x="50" y="30" text-anchor="end">94.6</text><text x="70" y="22" fill="#1d4ed8">VERTICAL GOAL top – above any robot, so it must be shot, not placed</text>
+  </g>
+</svg>
+<figcaption>Heights to scale (3 px = 1 in. vertically). The board clearance sits between the heights needed to place into GOAL 1 and GOAL 2, which makes going under or going tall a real choice.</figcaption>
+</figure>
+<ul>
+  <li><b>32 in. board clearance</b> is the keystone. A robot that places into GOAL 1 can fit under (cube top ≈ 27 in.). A robot that places into GOAL 2 cannot (≈ 47 in.) unless it telescopes, which costs mechanism complexity.</li>
+  <li><b>78 in. max height</b> implements your rule literally: goal 3 rim plus two cube heights. A lift can get a cube over GOAL 3, but can't tower over the field with a stack.</li>
+  <li><b>48 in. "duck" limit in the opponent's launch zone</b> keeps defenders from swatting shots, and it has a side effect: your own GOAL 1 sits in the opponent's launch zone, so even a tall robot has to duck to score GOAL 1. That quietly favours short robots on the low goal.</li>
+</ul>
+
+<h3>2.2 Near vs far</h3>
+<table>
+  <tr><th>Goal</th><th>Where (own alliance's view)</th><th>Pts</th><th>4-cube cycle</th><th>What makes it hard</th></tr>
+  <tr><td>GOAL 1 (18 in.)</td><td>Own wall, inside opponent's launch zone</td><td>2</td><td>8</td><td>Crowded by opponent shooters; must stay ≤ 48 in. there</td></tr>
+  <tr><td>GOAL 2 ×2 (38 in.)</td><td>Own half, goal-side wall</td><td>3</td><td>12</td><td>Needs a lift; tight 11 in. throat</td></tr>
+  <tr><td>GOAL 3 (60 in.)</td><td>Opponent's half, goal-side wall</td><td>5</td><td>20</td><td>Tall lift, tight throat, long trip, opponent traffic</td></tr>
+  <tr><td>VERTICAL GOAL (≥ 60 in.)</td><td>Opponent's wall</td><td>4</td><td>16</td><td>Must shoot from ≥ 24 in. behind the release line, over the opponent's GOAL 1, into a zone with no protection</td></tr>
+</table>
+<p>The point ladder (2 / 3 / 5 / 4) pays for height and distance. The vertical goal is worth slightly less than GOAL 3 because it's a bigger target (30 in. hexagon vs 11 in. throat). Its extra incentive is the SKYLINE/SKYFORGE RP, not raw points.</p>
+
+<h3>2.3 Precision, not just size</h3>
+<p>The throat is 11 in. for a 9 in. cube: about 1 in. clearance per side and roughly ±15° yaw tolerance. A cube turned 45° simply doesn't fit. This rewards controlled, square placement and makes shooting into the horizontal goals possible but risky, as your brief asked ("slightly larger than the cube, you can shoot them in"). The vertical goal is the opposite: a large opening, but shooting is mandatory.</p>
+
+<h3>2.4 Risk vs safety for human players</h3>
+<p>Each alliance has three introduction points. IP-A and IP-B feed into the protected SAFE ZONE, which is safe but at the far end of your own field. IP-C feeds the open field closer to mid-field: faster, but opponents may take those cubes. The human player chooses where supply appears, which is a small but real strategic lever. No introduction during AUTO, as specified.</p>
+
+<h2>3 The gameplay I was aiming for</h2>
+
+<h3>3.1 Robot archetypes</h3>
+<table>
+  <tr><th style="width:18%">Archetype</th><th>Build</th><th>Primary jobs</th><th>Endgame</th><th>Weakness</th></tr>
+  <tr><td><b>Low rider</b></td><td>≤ 32 in., simple low placer, 4-cube hopper</td><td>GOAL 1; exclusive access to the 8 under-board cubes and the short path under the boards along the feeder side; contests its own GOAL 1 area in the opponent's launch zone</td><td>UNDER (3)</td><td>Capped at 2-point goals; can't hang</td></tr>
+  <tr><td><b>Tower</b></td><td>Elevator / arm to ~ 70 in., careful end effector</td><td>GOAL 2 and GOAL 3 placement</td><td>HANG (10)</td><td>Goes around the boards; long trips to GOAL 3</td></tr>
+  <tr><td><b>Launcher</b></td><td>Shooter, often mid-height</td><td>VERTICAL GOAL from the launch zone; carries the vertical-goal RP</td><td>HANG or UNDER, depending on height</td><td>Must travel to the opponent's wall and shoot over a blocker into an unprotected zone</td></tr>
+  <tr><td><b>Folding hybrid</b></td><td>Telescopes below 32 in., rises above 60 in.</td><td>Everything, including the under-board path</td><td>HANG</td><td>Mechanical complexity and weight; the elite-team option</td></tr>
+  <tr><td><b>Defender</b></td><td>Any, often a low rider</td><td>Clog the opponent's launch zone (≤ 48 in.), contest IP-C cubes and centre-line cubes</td><td>UNDER / HANG</td><td>Can't enter the opponent's SAFE ZONE; cage-style board protection in the last 20 s</td></tr>
+</table>
+
+<div class="hyp"><b>Hypothesis for a winning alliance (unverified, needs simulation):</b> Tower + Launcher + Low rider. Between them they cover all three levels for the LEVELS RP (the low rider takes GOAL 1, which tall robots must duck to reach), 10 vertical-goal cubes for the SKYLINE/SKYFORGE RP, and a 1 HANG + 1 UNDER endgame for the BOARD RP. That is exactly the combination the RP thresholds were built around. A top-tier alternative is two folding hybrids plus a launcher.</div>
+
+<h3>3.2 Match flow</h3>
+<table>
+  <tr><th style="width:18%">Phase</th><th>What should happen</th><th>Design reason</th></tr>
+  <tr><td>AUTO (15 s)</td><td>1 preloaded cube each. Races for the 28 centre-line cubes. Shooters cross to the opponent's wall early while it's quiet. No human-player feeding.</td><td>AUTO = TELEOP points (as you asked), so AUTO's value is <i>tempo</i>, not a multiplier. G403 stops robots that cross the centre line from ramming opponents in AUTO.</td></tr>
+  <tr><td>TELEOP (2:15)</td><td>4-cube cycles. Short cycles to GOAL 1/2 near home, longer cycles to GOAL 3 and the vertical goal. Human players keep the safe zone and IP-C stocked. Defence around launch zones and IP-C.</td><td>A possession limit of 4 turns every trip into a planning decision (fill up vs go now). There's no "1 defender" rule, because both alliances must work in each other's half.</td></tr>
+  <tr><td>ENDGAME (last 20 s)</td><td>Tall robots HANG on their own board's rail; one short robot parks fully UNDER. Opponents are kept away from the board.</td><td>Board geometry fits only one standard robot fully under (max 47.25 in. square), so "1 HANG + 1 UNDER" is the cheapest BOARD RP, and it needs a short robot on the alliance.</td></tr>
+</table>
+
+<h3>3.3 Where the interesting interactions happen</h3>
+<ul>
+  <li><b>The launch zone:</b> shooters from one alliance and low-goal scorers from the other share the same 90 × 72 in. space. Neither side is protected there.</li>
+  <li><b>IP-C:</b> an unprotected supply point that invites a quick steal.</li>
+  <li><b>Centre line in AUTO:</b> 28 cubes, first come first served.</li>
+  <li><b>Under the boards:</b> 8 cubes that tall robots can't reach well; a quiet reward for building short.</li>
+  <li><b>GOAL 3 in the opponent's half:</b> the richest goal is the one you have to drive through traffic to reach.</li>
+</ul>
+
+<h2>4 Scoring and RP logic</h2>
+<table>
+  <tr><th style="width:22%">Element</th><th>Value</th><th>Why</th></tr>
+  <tr><td>LEVELS RP</td><td>≥ 5 in GOAL 1, ≥ 8 across both GOAL 2s, ≥ 5 in GOAL 3</td><td>Can't be farmed on one goal. Forces breadth across all heights, and effectively requires both a low-goal presence and a tall robot. (You confirmed x1, x2 and x3 are horizontal.)</td></tr>
+  <tr><td>SKYLINE / SKYFORGE RP</td><td>≥ 10 cubes in own vertical goal</td><td>Makes shooting a first-class role. Only the owner's legal deliveries count, which closes a loophole where both alliances fed each other's goals.</td></tr>
+  <tr><td>BOARD RP</td><td>2 HANG, or 1 HANG + 1 UNDER</td><td>Two routes: an all-tall alliance or a mixed alliance. Keeps the short robot useful at the end.</td></tr>
+  <tr><td>HANG / UNDER</td><td>10 / 3</td><td>Hanging is hard and valuable. UNDER is cheap but still a reason to be short.</td></tr>
+  <tr><td>Win / Tie</td><td>3 / 1</td><td>Same as 2025; maximum 6 RP per match.</td></tr>
+</table>
+<p>All thresholds are exposed as tuning parameters in manual section 10.2, because they haven't been simulated.</p>
+
+<h2>5 Key decisions and the alternatives I rejected</h2>
+<table>
+  <tr><th style="width:26%">Decision</th><th>Chosen</th><th>Rejected / why</th></tr>
+  <tr><td>Cube size</td><td>9 in. solid foam</td><td>6 in. (FTC size): too many per robot for a 4-cube limit. 11+ in.: can't hold 4.</td></tr>
+  <tr><td>Field size</td><td>Standard 54 × 27 ft</td><td>Sketch proportions: not a real FRC field.</td></tr>
+  <tr><td>Symmetry</td><td>Mirror across the centre line (both goal walls on one side)</td><td>180° rotation: doesn't match the sketch.</td></tr>
+  <tr><td>Vertical goal owner</td><td>Goal of the colour drawn, mounted on the opponent's wall</td><td>Own-wall goal: contradicts the sketch colours and removes the blocker interaction.</td></tr>
+  <tr><td>Endgame RP</td><td>1 HANG + 1 UNDER</td><td>1 HANG + 2 UNDER: two standard robots can't fit fully under one board.</td></tr>
+  <tr><td>Defender limit</td><td>None</td><td>2025's "1 defender at a time": would block normal scoring, since GOAL 3 and the vertical goal are in the opponent's half.</td></tr>
+  <tr><td>Protected zones</td><td>Only the SAFE ZONE</td><td>Protecting the launch zone: would kill the intended blocker/defence interaction there. You specified the safe zone as the only one.</td></tr>
+  <tr><td>Rules baseline</td><td>Inherit 2025, add only game-specific rules</td><td>Writing everything new: more text, more loopholes, less familiar to teams.</td></tr>
+</table>
+
+<h2>6 Independent review and what it changed</h2>
+<p>A GPT-6 reviewer audited the manual for broken or missing items and loopholes. Four high-severity findings were fixed, and a second pass confirmed the fixes introduced nothing new:</p>
+<ol>
+  <li><b>Adjacent placement into the vertical goal:</b> a robot could reach around its opponent's GOAL 1. Added a 24 in. <b>release line</b> and a requirement that the cube is released behind it and travels unsupported.</li>
+  <li><b>Reciprocal RP farming:</b> both alliances could legally feed each other's vertical goals near their own walls. Now only the <b>owner's legal deliveries</b> score or count toward the RP.</li>
+  <li><b>Rule conflict:</b> an inherited 2025 card example ("climbing on the BARGE") contradicted legal board climbing. G211 was modified.</li>
+  <li><b>Impossible geometry:</b> GOAL 1 was specified to discharge through a wall 150 in. away. It now discharges through the adjacent alliance wall.</li>
+</ol>
+
+<h2>7 The branding theme – Steampunk SKYFORGE</h2>
+<table>
+  <tr><th style="width:24%">Aspect</th><th>Logic</th></tr>
+  <tr><td>Why a theme at all</td><td>Fun and identity. A named, branded game is easier to talk about, present and rally a team around. It's a <i>skin only</i>: same field, rules, points and geometry (checked by a content comparison and a STEP geometry re-import).</td></tr>
+  <tr><td>Why "Steampunk"</td><td>Homage to FRC Team 1577 Steampunk, which you pointed to. It's a fan tribute, not affiliated with or endorsed by the team, and it doesn't reuse their mark.</td></tr>
+  <tr><td>Why "SKYFORGE"</td><td><b>Sky</b>: floating boards, high goals, the vertical goal above the wall; it keeps the spirit of SKYLINE. <b>Forge</b>: steam, brass and making things, i.e. what building a robot is. One word, easy to say, and it fits your "Steampunk &lt;name&gt;" pattern.</td></tr>
+  <tr><td>Logo symbolism</td><td>A <b>brass cog</b> (the machine, and the steampunk genre), an <b>ember-orange hexagon</b> (the vertical goal, with orange as a nod to 1577's avatar colour), a <b>yellow cube</b> (the game piece), and a <b>steam wisp</b> (the forge).</td></tr>
+  <tr><td>Palette</td><td>Soot black, brass, ember orange, parchment. Alliance red and blue and the cube yellow are unchanged, so the field still reads correctly.</td></tr>
+  <tr><td>Separation</td><td>The themed files were generated from the un-themed SKYLINE working files, which aren't part of this repository. Rules, field and scoring are identical; only the name, colours and logo differ.</td></tr>
+</table>
+
+<h2>8 Open questions – what to playtest first</h2>
+<ol>
+  <li><b>Cycle simulation</b> to tune the RP thresholds (5 / 8 / 5 / 10) and the point ladder, so the 2-point GOAL 1 is still worth a robot's time.</li>
+  <li><b>Throat prototype</b> with real foam cubes: does ±15° hold, and can cubes be shot into an 11 in. throat at all?</li>
+  <li><b>Board clearance sweep</b> (30–34 in.): is 32 in. the right split between low and tall robots?</li>
+  <li><b>Launch-zone congestion:</b> is the shared zone fun, or does it become a pushing match?</li>
+  <li><b>Human-player throughput</b> vs 26 reserve cubes per alliance.</li>
+  <li><b>Board structure:</b> the cantilevered 600 lb support hasn't been engineered.</li>
+</ol>
+
+</main>
+</body>
+</html>

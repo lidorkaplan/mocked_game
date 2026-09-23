@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steampunk SKYFORGE – Mock FRC Game Manual v0.1</title>
+<style>
+  :root { --red:#d62828; --blue:#1d4ed8; --brown:#8b5a2b; --purple:#8e44ad; --cube:#f5c400; --ink:#1f2937; --muted:#6b7280; }
+  * { box-sizing: border-box; }
+  body { font: 15px/1.5 "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); margin: 0; background: #f3f4f6; }
+  main { max-width: 1000px; margin: 0 auto; background: #fff; padding: 40px 56px 80px; }
+  h1 { font-size: 34px; margin: 0; letter-spacing: 2px; }
+  h2 { border-bottom: 3px solid var(--ink); padding-bottom: 4px; margin-top: 48px; page-break-before: always; }
+  h2.first { page-break-before: auto; }
+  h3 { margin-top: 28px; }
+  h4 { margin: 18px 0 6px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0 18px; font-size: 13.5px; }
+  th, td { border: 1px solid #cbd5e1; padding: 5px 8px; vertical-align: top; text-align: left; }
+  th { background: #e5e7eb; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  .cover { border: 3px solid var(--ink); padding: 24px 28px; margin-bottom: 24px; }
+  .cover .sub { font-size: 18px; color: var(--muted); }
+  .disclaimer { background: #fff7ed; border-left: 5px solid #f97316; padding: 10px 14px; margin: 14px 0; font-size: 14px; }
+  .note { background: #eef2ff; border-left: 5px solid #6366f1; padding: 8px 14px; margin: 12px 0; font-size: 14px; }
+  .intent { background: #ecfdf5; border-left: 5px solid #10b981; padding: 8px 14px; margin: 12px 0; font-size: 14px; }
+  .rule { border: 1px solid #cbd5e1; border-left: 6px solid var(--ink); padding: 8px 14px; margin: 10px 0; }
+  .rule .id { font-weight: 700; margin-right: 6px; }
+  .rule .title { font-weight: 700; }
+  .rule .viol { display: block; margin-top: 6px; font-weight: 600; color: #991b1b; }
+  .rule.new { border-left-color: #10b981; }
+  .rule.mod { border-left-color: #f59e0b; }
+  .legend-tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 0 6px; border-radius: 3px; color: #fff; }
+  .t-new { background: #10b981; } .t-mod { background: #f59e0b; } .t-inh { background: #6b7280; }
+  figure { margin: 18px 0 26px; text-align: center; }
+  figure svg { width: 100%; height: auto; border: 1px solid #e5e7eb; background: #fff; }
+  figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .fig-field svg { max-width: 640px; }
+  .fig-small svg { max-width: 420px; }
+  .toc ol { columns: 2; font-size: 14px; }
+  .timeline { display: flex; height: 38px; border: 1px solid var(--ink); margin: 10px 0 4px; font-size: 12px; font-weight: 600; }
+  .timeline div { display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; }
+  .tl-scale { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+  code { background: #f3f4f6; padding: 0 4px; border-radius: 3px; }
+  .red { color: var(--red); font-weight: 600; } .blue { color: var(--blue); font-weight: 600; }
+  svg text { font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .sketch { max-width: 420px; width: 100%; border: 1px solid #e5e7eb; }
+  @media print { body { background: #fff; } main { padding: 0; max-width: none; } h2 { margin-top: 0; } }
+</style>
+<style>
+  :root { --ink:#2b1d12; --muted:#7a5c3e; --brass:#d9a441; --brass-dark:#8a6420; --ember:#e8641c; }
+  body { background:#1c1510 radial-gradient(circle at 50% 0,#3a2a1b,#1c1510 70%) fixed; }
+  main { background:#f7efdc; margin:28px auto; box-shadow:0 0 0 6px #8a6420,0 0 0 9px #2b1d12,0 18px 50px rgba(0,0,0,.55); }
+  h1, h2, h3, h4, .toc b { font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif; }
+  h2 { color:#3b2414; border-bottom:4px double var(--brass-dark); }
+  h3 { color:#6b3f1d; }
+  a { color:#a24a14; }
+  table { background:#fffaf0; }
+  th { background:#ead7ac; }
+  th, td { border-color:#cdb388; }
+  figure svg, .sketch { border-color:#cdb388; }
+  .cover { background:#17110c; color:#f3e6c8; border:3px solid var(--brass-dark); border-radius:6px; }
+  .cover .sub { color:#d9a441; }
+  .cover .edition { color:#e9d9b8; font-size:13px; margin:6px 0 12px; }
+  .cover .disclaimer { color:var(--ink); background:#f7ead0; border-left-color:var(--ember); }
+  .lockup svg { width:100%; max-width:640px; height:auto; display:block; margin:0 auto 14px; }
+  .visually-hidden { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  @media print { body { background:#fff; } main { box-shadow:none; margin:0; } }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Steampunk SKYFORGE emblem'%3E  %3Cdefs%3E%3ClinearGradient id='fav-brass' x1='0' y1='0' x2='1' y2='1'%3E    %3Cstop offset='0' stop-color='%23f0c56a'/%3E%3Cstop offset='.55' stop-color='%23d9a441'/%3E%3Cstop offset='1' stop-color='%238a6420'/%3E%3C/linearGradient%3E%3C/defs%3E  %3Cpath d='M120.00,26.00 L127.03,8.22 L141.85,10.15 L144.09,29.14 L155.97,33.16 L169.27,19.42 L182.22,26.88 L177.03,45.28 L186.47,53.53 L204.01,45.93 L213.12,57.78 L201.28,72.79 L206.84,84.03 L225.96,83.72 L229.85,98.15 L213.16,107.49 L214.00,120.00 L231.78,127.03 L229.85,141.85 L210.86,144.09 L206.84,155.97 L220.58,169.27 L213.12,182.22 L194.72,177.03 L186.47,186.47 L194.07,204.01 L182.22,213.12 L167.21,201.28 L155.97,206.84 L156.28,225.96 L141.85,229.85 L132.51,213.16 L120.00,214.00 L112.97,231.78 L98.15,229.85 L95.91,210.86 L84.03,206.84 L70.73,220.58 L57.78,213.12 L62.97,194.72 L53.53,186.47 L35.99,194.07 L26.88,182.22 L38.72,167.21 L33.16,155.97 L14.04,156.28 L10.15,141.85 L26.84,132.51 L26.00,120.00 L8.22,112.97 L10.15,98.15 L29.14,95.91 L33.16,84.03 L19.42,70.73 L26.88,57.78 L45.28,62.97 L53.53,53.53 L45.93,35.99 L57.78,26.88 L72.79,38.72 L84.03,33.16 L83.72,14.04 L98.15,10.15 L107.49,26.84 Z' fill='url(%23fav-brass)' stroke='%232b1d12' stroke-width='4' stroke-linejoin='round'/%3E  %3Ccircle cx='120' cy='120' r='80' fill='%2317110c' stroke='%236b4a22' stroke-width='5'/%3E  %3Ccircle cx='181.82' cy='136.56' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='165.25' cy='165.25' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='136.56' cy='181.82' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='103.44' cy='181.82' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='74.75' cy='165.25' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='58.18' cy='136.56' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='58.18' cy='103.44' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='74.75' cy='74.75' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='103.44' cy='58.18' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='136.56' cy='58.18' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='165.25' cy='74.75' r='3.2' fill='%23d9a441'/%3E%3Ccircle cx='181.82' cy='103.44' r='3.2' fill='%23d9a441'/%3E  %3Cpolygon points='120.00,76.00 158.11,98.00 158.11,142.00 120.00,164.00 81.89,142.00 81.89,98.00' fill='none' stroke='%23e8641c' stroke-width='8' stroke-linejoin='round'/%3E  %3Cpolygon points='120,100 139,110 120,120 101,110' fill='%23ffd84a' stroke='%232b1d12' stroke-width='2.5' stroke-linejoin='round'/%3E  %3Cpolygon points='101,110 120,120 120,142 101,132' fill='%23f5c400' stroke='%232b1d12' stroke-width='2.5' stroke-linejoin='round'/%3E  %3Cpolygon points='139,110 120,120 120,142 139,132' fill='%23c99a00' stroke='%232b1d12' stroke-width='2.5' stroke-linejoin='round'/%3E  %3Cpath d='M156 58 q10 -12 22 -6 q10 -14 24 -2' fill='none' stroke='%23f3e6c8' stroke-width='5' stroke-linecap='round' opacity='.85'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- Shared SVG definitions: the red end of the field is drawn once and mirrored for blue. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+    <marker id="arS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="2.4" markerHeight="2.4" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+    <marker id="ip" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+    <rect id="cube" width="9" height="9" fill="#f5c400" stroke="#8a6d00" stroke-width="0.5"/>
+
+    <!-- One ALLIANCE END in red-end coordinates (inches). --own = alliance whose wall this is, --opp = other alliance. -->
+    <g id="end">
+      <!-- ALLIANCE WALL: driver stations and VERTICAL GOAL section (outside FIELD) -->
+      <rect x="0" y="-26" width="66" height="26" style="fill:var(--own);fill-opacity:.14;stroke:var(--own)" stroke-width="0.8"/>
+      <rect x="66" y="-26" width="66" height="26" style="fill:var(--own);fill-opacity:.14;stroke:var(--own)" stroke-width="0.8"/>
+      <rect x="132" y="-26" width="66" height="26" fill="#e5e7eb" stroke="#6b7280" stroke-width="0.8"/>
+      <rect x="198" y="-26" width="66" height="26" style="fill:var(--own);fill-opacity:.14;stroke:var(--own)" stroke-width="0.8"/>
+      <!-- FEEDER STATION (HUMAN PLAYER area, outside FIELD) -->
+      <path d="M264,-26 H380 V204 H324 V0 H264 Z" style="fill:var(--own);fill-opacity:.07;stroke:var(--own)" stroke-width="0.8" stroke-dasharray="3 2"/>
+      <!-- reserve CUBES (26) -->
+      <use href="#cube" x="349.5" y="5.5"/><use href="#cube" x="365.5" y="5.5"/>
+      <use href="#cube" x="349.5" y="20.5"/><use href="#cube" x="365.5" y="20.5"/>
+      <use href="#cube" x="349.5" y="35.5"/><use href="#cube" x="365.5" y="35.5"/>
+      <use href="#cube" x="349.5" y="50.5"/><use href="#cube" x="365.5" y="50.5"/>
+      <use href="#cube" x="349.5" y="65.5"/><use href="#cube" x="365.5" y="65.5"/>
+      <use href="#cube" x="349.5" y="80.5"/><use href="#cube" x="365.5" y="80.5"/>
+      <use href="#cube" x="349.5" y="95.5"/><use href="#cube" x="365.5" y="95.5"/>
+      <use href="#cube" x="349.5" y="110.5"/><use href="#cube" x="365.5" y="110.5"/>
+      <use href="#cube" x="349.5" y="125.5"/><use href="#cube" x="365.5" y="125.5"/>
+      <use href="#cube" x="349.5" y="140.5"/><use href="#cube" x="365.5" y="140.5"/>
+      <use href="#cube" x="349.5" y="155.5"/><use href="#cube" x="365.5" y="155.5"/>
+      <use href="#cube" x="349.5" y="170.5"/><use href="#cube" x="365.5" y="170.5"/>
+      <use href="#cube" x="349.5" y="185.5"/><use href="#cube" x="365.5" y="185.5"/>
+
+      <!-- STARTING ZONE -->
+      <rect x="0" y="0" width="114" height="90" fill="#8b5a2b" fill-opacity=".16" stroke="#8b5a2b" stroke-width="1.6"/>
+      <!-- opponent LAUNCH ZONE -->
+      <rect x="120" y="0" width="90" height="72" style="fill:var(--opp);fill-opacity:.07;stroke:var(--opp)" stroke-width="1.6" stroke-dasharray="5 3"/>
+      <line x1="120" y1="24" x2="210" y2="24" style="stroke:var(--opp)" stroke-width="1.2" stroke-dasharray="2 2"/>
+      <!-- SAFE ZONE -->
+      <rect x="264" y="0" width="60" height="144" style="fill:var(--own);fill-opacity:.12"/>
+      <line x1="264" y1="144" x2="324" y2="144" style="stroke:var(--own)" stroke-width="1.8" stroke-dasharray="5 3"/>
+      <!-- GUARDRAILS -->
+      <line x1="0" y1="90" x2="48" y2="90" stroke="#8e44ad" stroke-width="2.5"/>
+      <line x1="264" y1="0" x2="264" y2="144" stroke="#8e44ad" stroke-width="2.5"/>
+
+      <!-- HORIZONTAL GOALS (24 x 24 in base, 11 x 11 in THROAT) -->
+      <rect x="0" y="108" width="24" height="24" fill="#fff" style="stroke:var(--own)" stroke-width="1.8"/>
+      <rect x="6.5" y="114.5" width="11" height="11" style="fill:var(--own);fill-opacity:.28;stroke:var(--own)" stroke-width="0.6"/>
+      <rect x="0" y="180" width="24" height="24" fill="#fff" style="stroke:var(--opp)" stroke-width="1.8"/>
+      <rect x="6.5" y="186.5" width="11" height="11" style="fill:var(--opp);fill-opacity:.28;stroke:var(--opp)" stroke-width="0.6"/>
+      <rect x="0" y="258" width="24" height="24" fill="#fff" style="stroke:var(--own)" stroke-width="1.8"/>
+      <rect x="6.5" y="264.5" width="11" height="11" style="fill:var(--own);fill-opacity:.28;stroke:var(--own)" stroke-width="0.6"/>
+      <rect x="153" y="0" width="24" height="24" fill="#fff" style="stroke:var(--own)" stroke-width="1.8"/>
+      <rect x="159.5" y="6.5" width="11" height="11" style="fill:var(--own);fill-opacity:.28;stroke:var(--own)" stroke-width="0.6"/>
+      <!-- opponent VERTICAL GOAL: opening on the ALLIANCE WALL (bar) + plan symbol (hexagon) -->
+      <rect x="150" y="-3" width="30" height="3" style="fill:var(--opp)"/>
+      <polygon points="165,-8 182.32,2 182.32,22 165,32 147.68,22 147.68,2" fill="none" style="stroke:var(--opp)" stroke-width="1.5"/>
+
+      <!-- FLOATING BOARD + HANG RAIL -->
+      <polygon points="324,216 324,324 240,324" style="fill:var(--own);fill-opacity:.55;stroke:var(--own)" stroke-width="1"/>
+      <line x1="240" y1="324" x2="324" y2="216" stroke="#111" stroke-width="1.66"/>
+
+      <!-- INTRODUCTION POINT openings and arrows -->
+      <rect x="306" y="-1.5" width="12" height="3" fill="#fff" stroke="#111" stroke-width="0.4"/>
+      <rect x="322.5" y="54" width="3" height="12" fill="#fff" stroke="#111" stroke-width="0.4"/>
+      <rect x="322.5" y="174" width="3" height="12" fill="#fff" stroke="#111" stroke-width="0.4"/>
+      <line x1="312" y1="-24" x2="312" y2="-3" stroke="#111" stroke-width="1.6" marker-end="url(#ip)"/>
+      <line x1="347" y1="60" x2="327" y2="60" stroke="#111" stroke-width="1.6" marker-end="url(#ip)"/>
+      <line x1="347" y1="180" x2="327" y2="180" stroke="#111" stroke-width="1.6" marker-end="url(#ip)"/>
+
+      <!-- staged CUBES: SAFE ZONE (10) -->
+      <use href="#cube" x="271.5" y="19.5"/><use href="#cube" x="295.5" y="19.5"/>
+      <use href="#cube" x="271.5" y="43.5"/><use href="#cube" x="295.5" y="43.5"/>
+      <use href="#cube" x="271.5" y="67.5"/><use href="#cube" x="295.5" y="67.5"/>
+      <use href="#cube" x="271.5" y="91.5"/><use href="#cube" x="295.5" y="91.5"/>
+      <use href="#cube" x="271.5" y="115.5"/><use href="#cube" x="295.5" y="115.5"/>
+      <!-- near IP-C (4) -->
+      <use href="#cube" x="271.5" y="163.5"/><use href="#cube" x="295.5" y="163.5"/>
+      <use href="#cube" x="271.5" y="187.5"/><use href="#cube" x="295.5" y="187.5"/>
+      <!-- under FLOATING BOARD (4) -->
+      <use href="#cube" x="285.5" y="285.5"/><use href="#cube" x="305.5" y="285.5"/>
+      <use href="#cube" x="285.5" y="305.5"/><use href="#cube" x="305.5" y="305.5"/>
+      <!-- CENTER LINE rows on this half (14) -->
+      <use href="#cube" x="79.5" y="283.5"/><use href="#cube" x="103.5" y="283.5"/><use href="#cube" x="127.5" y="283.5"/><use href="#cube" x="151.5" y="283.5"/><use href="#cube" x="175.5" y="283.5"/><use href="#cube" x="199.5" y="283.5"/><use href="#cube" x="223.5" y="283.5"/>
+      <use href="#cube" x="79.5" y="307.5"/><use href="#cube" x="103.5" y="307.5"/><use href="#cube" x="127.5" y="307.5"/><use href="#cube" x="151.5" y="307.5"/><use href="#cube" x="175.5" y="307.5"/><use href="#cube" x="199.5" y="307.5"/><use href="#cube" x="223.5" y="307.5"/>
+    </g>
+  </defs>
+</svg>
+
+<main>
+
+<div class="cover">
+  <div class="lockup"><svg viewBox="0 0 780 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Steampunk SKYFORGE logo">
+  <rect x="3" y="3" width="774" height="234" rx="18" fill="#17110c" stroke="#d9a441" stroke-width="6"/>
+  <rect x="14" y="14" width="752" height="212" rx="12" fill="none" stroke="#6b4a22" stroke-width="2" stroke-dasharray="2 7"/>
+  <svg x="18" y="10" width="220" height="220" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Steampunk SKYFORGE emblem">
+  <defs><linearGradient id="cover-brass" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f0c56a"/><stop offset=".55" stop-color="#d9a441"/><stop offset="1" stop-color="#8a6420"/></linearGradient></defs>
+  <path d="M120.00,26.00 L127.03,8.22 L141.85,10.15 L144.09,29.14 L155.97,33.16 L169.27,19.42 L182.22,26.88 L177.03,45.28 L186.47,53.53 L204.01,45.93 L213.12,57.78 L201.28,72.79 L206.84,84.03 L225.96,83.72 L229.85,98.15 L213.16,107.49 L214.00,120.00 L231.78,127.03 L229.85,141.85 L210.86,144.09 L206.84,155.97 L220.58,169.27 L213.12,182.22 L194.72,177.03 L186.47,186.47 L194.07,204.01 L182.22,213.12 L167.21,201.28 L155.97,206.84 L156.28,225.96 L141.85,229.85 L132.51,213.16 L120.00,214.00 L112.97,231.78 L98.15,229.85 L95.91,210.86 L84.03,206.84 L70.73,220.58 L57.78,213.12 L62.97,194.72 L53.53,186.47 L35.99,194.07 L26.88,182.22 L38.72,167.21 L33.16,155.97 L14.04,156.28 L10.15,141.85 L26.84,132.51 L26.00,120.00 L8.22,112.97 L10.15,98.15 L29.14,95.91 L33.16,84.03 L19.42,70.73 L26.88,57.78 L45.28,62.97 L53.53,53.53 L45.93,35.99 L57.78,26.88 L72.79,38.72 L84.03,33.16 L83.72,14.04 L98.15,10.15 L107.49,26.84 Z" fill="url(#cover-brass)" stroke="#2b1d12" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="120" cy="120" r="80" fill="#17110c" stroke="#6b4a22" stroke-width="5"/>
+  <circle cx="181.82" cy="136.56" r="3.2" fill="#d9a441"/><circle cx="165.25" cy="165.25" r="3.2" fill="#d9a441"/><circle cx="136.56" cy="181.82" r="3.2" fill="#d9a441"/><circle cx="103.44" cy="181.82" r="3.2" fill="#d9a441"/><circle cx="74.75" cy="165.25" r="3.2" fill="#d9a441"/><circle cx="58.18" cy="136.56" r="3.2" fill="#d9a441"/><circle cx="58.18" cy="103.44" r="3.2" fill="#d9a441"/><circle cx="74.75" cy="74.75" r="3.2" fill="#d9a441"/><circle cx="103.44" cy="58.18" r="3.2" fill="#d9a441"/><circle cx="136.56" cy="58.18" r="3.2" fill="#d9a441"/><circle cx="165.25" cy="74.75" r="3.2" fill="#d9a441"/><circle cx="181.82" cy="103.44" r="3.2" fill="#d9a441"/>
+  <polygon points="120.00,76.00 158.11,98.00 158.11,142.00 120.00,164.00 81.89,142.00 81.89,98.00" fill="none" stroke="#e8641c" stroke-width="8" stroke-linejoin="round"/>
+  <polygon points="120,100 139,110 120,120 101,110" fill="#ffd84a" stroke="#2b1d12" stroke-width="2.5" stroke-linejoin="round"/>
+  <polygon points="101,110 120,120 120,142 101,132" fill="#f5c400" stroke="#2b1d12" stroke-width="2.5" stroke-linejoin="round"/>
+  <polygon points="139,110 120,120 120,142 139,132" fill="#c99a00" stroke="#2b1d12" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M156 58 q10 -12 22 -6 q10 -14 24 -2" fill="none" stroke="#f3e6c8" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+</svg>
+  <text x="262" y="98" style='font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif' font-size="44" font-weight="700" textLength="470" lengthAdjust="spacingAndGlyphs" fill="#e8641c">STEAMPUNK</text>
+  <text x="258" y="184" style='font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif' font-size="96" font-weight="700" textLength="492" lengthAdjust="spacingAndGlyphs" fill="#f3e6c8" stroke="#8a6420" stroke-width="2" paint-order="stroke">SKYFORGE</text>
+  <text x="264" y="214" style='font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif' font-size="17" textLength="470" lengthAdjust="spacingAndGlyphs" fill="#d9a441">MOCK FRC GAME · THEME EDITION</text>
+</svg></div>
+  <h1 class="visually-hidden">Steampunk SKYFORGE</h1>
+  <div class="sub">FIRST® Robotics Competition – style MOCK GAME · Steampunk theme edition</div>
+  <div class="edition">Theme edition: only the name, colours and logo differ. Field, scoring and rules are identical to the SKYLINE edition. The steampunk styling is a fan homage and is not affiliated with or endorsed by FRC Team 1577.</div>
+  <div class="sub">Game Manual (Field, Scoring, Game Rules, ROBOT size rules) – Version 0.1 draft – 2026-09-22</div>
+  <div class="disclaimer"><b>Unofficial.</b> This is a mock game written for design-practice purposes. It is not affiliated with or endorsed by <i>FIRST</i>®. Structure, penalty values, conduct rules and ROBOT construction rules are modelled on the 2025 <i>REEFSCAPE</i> Game Manual (with 2019 <i>DESTINATION: DEEP SPACE</i> used for the height-limit zone concept). Where this manual says “inherited”, the rule of that number in the 2025 manual applies with game terms substituted (Section 7.0). Nothing in this document has been prototyped; all numbers are design proposals.</div>
+</div>
+
+<div class="toc">
+  <b>Contents</b>
+  <ol>
+    <li><a href="#s1">Introduction &amp; conventions</a></li>
+    <li><a href="#s2">Game overview</a></li>
+    <li><a href="#s3">Glossary</a></li>
+    <li><a href="#s4">ARENA &amp; FIELD layout</a></li>
+    <li><a href="#s5">MATCH play &amp; scoring</a></li>
+    <li><a href="#s6">Violations</a></li>
+    <li><a href="#s7">Game rules (G)</a></li>
+    <li><a href="#s8">ROBOT construction rules (R)</a></li>
+    <li><a href="#s9">Inspection &amp; tournament</a></li>
+    <li><a href="#s10">Design notes, tuning parameters &amp; open items</a></li>
+  </ol>
+</div>
+
+<!-- ======================================================= 1 -->
+<h2 id="s1" class="first">1 Introduction &amp; conventions</h2>
+
+<h3>1.1 Units, tolerances and coordinates</h3>
+<ul>
+  <li>Dimensions are in inches with millimetres in parentheses. FIELD dimensions are nominal, ±1 in. (±25 mm) unless noted; teams should design for this variation, as in real FRC events.</li>
+  <li><b>Coordinate system</b> (used throughout, Figure 4-1): origin <b>O</b> is the carpet-level corner where the <span class="red">red</span> ALLIANCE WALL meets the GOAL-SIDE FIELD BORDER. <b>+X</b> runs across the FIELD toward the FEEDER-SIDE border (0 → 324 in.). <b>+Y</b> runs along the FIELD toward the <span class="blue">blue</span> ALLIANCE WALL (0 → 648 in.). <b>Z</b> is height above the carpet.</li>
+  <li><b>Symmetry:</b> the <span class="blue">blue</span> end is the <b>mirror image</b> of the <span class="red">red</span> end across the CENTER LINE (Y = 324 in.), with colours swapped: a red item at (X, Y) has a blue counterpart at (X, 648 − Y). It is a reflection, not a 180° rotation, so both alliances have their HORIZONTAL GOALS on the same GOAL-SIDE border (X = 0).</li>
+  <li>ZONE dimensions are to the outside edge of the 2 in. (51 mm) boundary tape; the tape is part of the ZONE. ZONES are infinitely tall volumes.</li>
+</ul>
+
+<h3>1.2 Source concept</h3>
+<p>The layout below was translated from the designer's sketch. The mapping of sketch symbols to game elements is:</p>
+<figure>
+  <img class="sketch" src="field_layout_sketch.png" alt="Designer sketch of the field">
+  <figcaption>Figure 1-1 Source sketch (not to scale; red driver station at top).</figcaption>
+</figure>
+<table>
+  <tr><th>Sketch symbol</th><th>Game element</th><th>Section</th></tr>
+  <tr><td>Brown rectangle</td><td>STARTING ZONE (1 per alliance, 3 ROBOTS, against own ALLIANCE WALL)</td><td>4.4</td></tr>
+  <tr><td>Purple lines</td><td>GUARDRAILS (internal barriers). The outer boundary is called the FIELD BORDER in this manual to avoid confusion.</td><td>4.3</td></tr>
+  <tr><td>Rectangles 1 / 2 / 3</td><td>HORIZONTAL GOALS – GOAL 1 (low), GOAL 2 (mid, ×2), GOAL 3 (high), per alliance</td><td>4.5</td></tr>
+  <tr><td>Hexagon</td><td>VERTICAL GOAL, mounted on top of the <i>opponent</i> ALLIANCE WALL; the opponent's GOAL 1 stands directly in front of it as a blocker</td><td>4.6</td></tr>
+  <tr><td>Dashed line around hexagon</td><td>LAUNCH ZONE (a ROBOT must intersect it to deliver into its VERTICAL GOAL)</td><td>4.6</td></tr>
+  <tr><td>Arrows</td><td>INTRODUCTION POINTS (IP-A, IP-B, IP-C) for the HUMAN PLAYER, TELEOP only</td><td>4.8</td></tr>
+  <tr><td>Solid triangles</td><td>FLOATING BOARDS (elevated plates; HANG on them, or drive UNDER if the ROBOT is short enough)</td><td>4.7</td></tr>
+  <tr><td>Dashed line closing the feeder lane</td><td>SAFE ZONE (the only protected zone)</td><td>4.4</td></tr>
+  <tr><td>Yellow stars</td><td>CUBES (staged on the FIELD and in reserve outside the FIELD)</td><td>4.9–4.10</td></tr>
+</table>
+
+<!-- ======================================================= 2 -->
+<h2 id="s2">2 Game overview</h2>
+<p>In <b>Steampunk SKYFORGE</b>, two ALLIANCES of three ROBOTS collect foam CUBES and score them in HORIZONTAL GOALS at three heights along the GOAL-SIDE wall and in a hexagonal VERTICAL GOAL mounted on top of the <i>opponent's</i> ALLIANCE WALL. HUMAN PLAYERS introduce new CUBES through three INTRODUCTION POINTS from TELEOP onward. At the end of the MATCH, ROBOTS HANG from their ALLIANCE's FLOATING BOARD or park fully UNDER it.</p>
+<p>The central design trade-off is the <b>FLOATING BOARD clearance of 32 in. (813 mm)</b>. A short ROBOT, typically one that only places into GOAL 1 (18 in. rim), can drive under the boards. That gives it CUBES staged under the boards, a short path along the feeder side and UNDER points. Taller ROBOTS can reach GOAL 2, GOAL 3 and the VERTICAL GOAL but have to go around the boards. A ROBOT may reach at most two CUBE heights above the GOAL 3 rim (78 in. total height).</p>
+<p>AUTO and TELEOP scoring have the same point values.</p>
+
+<div class="timeline">
+  <div style="width:10%;background:#374151">AUTO 0:15</div>
+  <div style="width:76.7%;background:#6b7280">TELEOP 2:15 (HUMAN PLAYERS may introduce CUBES)</div>
+  <div style="width:13.3%;background:#b45309">ENDGAME 0:20</div>
+</div>
+<div class="tl-scale"><span>0:00</span><span>0:15</span><span>2:10</span><span>2:30</span></div>
+<p style="font-size:13px;color:#6b7280">ENDGAME is the last 20 seconds of TELEOP. The total MATCH is 2:30, the same as 2025.</p>
+
+<!-- ======================================================= 3 -->
+<h2 id="s3">3 Glossary</h2>
+<p>Terms not listed here (e.g. BUMPER, BUMPER ZONE, CONTROL, MOMENTARY, CONTINUOUS, REPEATED, PIN, ROBOT PERIMETER, DRIVE TEAM, FIELD STAFF) have their 2025 meanings. In 2025, MOMENTARY means fewer than approximately 3 seconds and CONTINUOUS means more than approximately 10 seconds.</p>
+<table>
+  <tr><th style="width:24%">Term</th><th>Definition</th></tr>
+  <tr><td>ALLIANCE WALL</td><td>The FIELD boundary at each end (Y = 0 red, Y = 648 in. blue), comprising 3 DRIVER STATIONS, the VERTICAL GOAL section and the corner of the FEEDER STATION.</td></tr>
+  <tr><td>CENTER LINE</td><td>Grey tape line at Y = 324 in. dividing the FIELD into the red half (Y &lt; 324) and the blue half.</td></tr>
+  <tr><td>CUBE</td><td>The SCORING ELEMENT: a 9 in. (229 mm) solid foam cube (Section 4.9).</td></tr>
+  <tr><td>ENDGAME</td><td>The final 20 seconds of TELEOP.</td></tr>
+  <tr><td>FEEDER STATION</td><td>The area outside the FEEDER-SIDE FIELD BORDER, from the ALLIANCE WALL to 204 in. from it, where the ALLIANCE's HUMAN PLAYERS and reserve CUBES are located.</td></tr>
+  <tr><td>FIELD BORDER</td><td>The 20 in. (508 mm) tall polycarbonate wall on the two long sides of the FIELD: the GOAL-SIDE border (X = 0) and the FEEDER-SIDE border (X = 324 in.).</td></tr>
+  <tr><td>FLOATING BOARD</td><td>An elevated right-triangle plate, one per ALLIANCE, whose underside is 32 in. above the carpet, located at the FEEDER-SIDE border on the ALLIANCE's own half, against the CENTER LINE.</td></tr>
+  <tr><td>GOAL 1 / GOAL 2 / GOAL 3</td><td>HORIZONTAL GOALS with RIM heights of 18 / 38 / 60 in. Each ALLIANCE has one GOAL 1, two GOAL 2s and one GOAL 3.</td></tr>
+  <tr><td>GUARDRAIL</td><td>A 20 in. tall, 2 in. thick internal barrier that ROBOTS and CUBES cannot pass through (purple in figures).</td></tr>
+  <tr><td>HANG</td><td>End-of-MATCH ROBOT state defined in 5.3.3.</td></tr>
+  <tr><td>HANG RAIL</td><td>A 1.66 in. (42 mm) OD round pipe (1¼ in. Sch. 40) along the hypotenuse edge of each FLOATING BOARD, centreline 33 in. above the carpet.</td></tr>
+  <tr><td>HORIZONTAL GOAL</td><td>A goal whose opening (the THROAT) is horizontal and faces up. CUBES must enter from above, by being dropped or LAUNCHED.</td></tr>
+  <tr><td>INTRODUCTION POINT (IP)</td><td>A 12 × 12 in. opening at carpet level through which HUMAN PLAYERS introduce CUBES. There are 3 per ALLIANCE: IP-A, IP-B and IP-C.</td></tr>
+  <tr><td>LAUNCH</td><td>To shoot a CUBE into the air, kick it across the floor toward a desired location, or throw it forcefully (same meaning as 2025 G412).</td></tr>
+  <tr><td>LAUNCH ZONE</td><td>A 90 × 72 in. ZONE in front of an ALLIANCE's VERTICAL GOAL, which is at the opponent's end. It is taped in the colour of the ALLIANCE that uses it.</td></tr>
+  <tr><td>RELEASE LINE</td><td>The dashed ALLIANCE-coloured line 24 in. (610 mm) fieldward of a VERTICAL GOAL's opening plane. A legal VERTICAL GOAL shot must be released with the entire CUBE on the fieldward side of this line.</td></tr>
+  <tr><td>RIM</td><td>The top edge of a HORIZONTAL GOAL THROAT. RIM height is the scoring height of the goal.</td></tr>
+  <tr><td>ROOF</td><td>The pyramidal top of a HORIZONTAL GOAL outside the THROAT. It slopes down and away from the RIM at 40°, so CUBES that miss slide off.</td></tr>
+  <tr><td>SAFE ZONE</td><td>A 60 × 144 in. lane on each ALLIANCE's own end, bounded by the ALLIANCE WALL, the FEEDER-SIDE border, a GUARDRAIL and the ALLIANCE-coloured dashed tape. It is the only protected ZONE in SKYFORGE.</td></tr>
+  <tr><td>SCORE BIN</td><td>A container outside the FIELD that receives CUBES from a goal. Scored CUBES remain there until the MATCH ends.</td></tr>
+  <tr><td>STARTING ZONE</td><td>A 114 × 90 in. ZONE in the GOAL-SIDE corner of the ALLIANCE's own end (brown).</td></tr>
+  <tr><td>THROAT</td><td>The 11 × 11 in. (279 mm) square vertical passage below the RIM of a HORIZONTAL GOAL.</td></tr>
+  <tr><td>UNDER</td><td>End-of-MATCH ROBOT state defined in 5.3.3.</td></tr>
+  <tr><td>VERTICAL GOAL</td><td>A hexagonal opening in a vertical plane that faces the FIELD, mounted on top of the opponent ALLIANCE WALL. Its lowest point is 60 in. above the carpet.</td></tr>
+</table>
+
+<!-- ======================================================= 4 -->
+<h2 id="s4">4 ARENA &amp; FIELD layout</h2>
+
+<h3>4.1 FIELD overview</h3>
+<p>The FIELD is a 324 × 648 in. (27 ft 0 in. × 54 ft 0 in., 8.23 × 16.46 m) carpeted area bounded by two ALLIANCE WALLS and two FIELD BORDERS. Standard FRC field proportions are used rather than the sketch's proportions.</p>
+
+<figure class="fig-field">
+<svg viewBox="-62 -66 474 792" role="img" aria-label="SKYFORGE field top view">
+  <rect x="0" y="0" width="324" height="648" fill="#fbfbf7" stroke="#111" stroke-width="2"/>
+  <line x1="0" y1="324" x2="324" y2="324" stroke="#9ca3af" stroke-width="1.5"/>
+  <use href="#end" style="--own:#d62828;--opp:#1d4ed8"/>
+  <use href="#end" style="--own:#1d4ed8;--opp:#d62828" transform="matrix(1 0 0 -1 0 648)"/>
+  <line x1="0" y1="324" x2="48" y2="324" stroke="#8e44ad" stroke-width="2.5"/>
+
+  <!-- axes and overall dimensions -->
+  <circle cx="0" cy="0" r="2" fill="#111"/>
+  <text x="-5" y="-4" font-size="7" text-anchor="end" font-weight="700">O</text>
+  <line x1="0" y1="-56" x2="42" y2="-56" stroke="#111" stroke-width="1" marker-end="url(#ar)"/>
+  <text x="46" y="-53.5" font-size="7">+X</text>
+  <line x1="-24" y1="0" x2="-24" y2="42" stroke="#111" stroke-width="1" marker-end="url(#ar)"/>
+  <text x="-24" y="52" font-size="7" text-anchor="middle">+Y</text>
+  <line x1="-46" y1="0" x2="-46" y2="648" stroke="#111" stroke-width="0.8" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  <text transform="translate(-49 324) rotate(-90)" font-size="7" text-anchor="middle">648 in. (54 ft 0 in. / 16.46 m)</text>
+  <line x1="0" y1="712" x2="324" y2="712" stroke="#111" stroke-width="0.8" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  <text x="162" y="722" font-size="7" text-anchor="middle">324 in. (27 ft 0 in. / 8.23 m)</text>
+
+  <!-- red end labels -->
+  <text x="162" y="-36" font-size="9" font-weight="700" fill="#d62828" text-anchor="middle">RED ALLIANCE WALL</text>
+  <text x="33" y="-10" font-size="6.5" fill="#d62828" text-anchor="middle">DS1</text>
+  <text x="99" y="-10" font-size="6.5" fill="#d62828" text-anchor="middle">DS2</text>
+  <text x="231" y="-10" font-size="6.5" fill="#d62828" text-anchor="middle">DS3</text>
+  <text x="165" y="-14" font-size="5" fill="#1d4ed8" text-anchor="middle">BLUE VERTICAL</text>
+  <text x="165" y="-8" font-size="5" fill="#1d4ed8" text-anchor="middle">GOAL (Z ≥ 60 in.)</text>
+  <text x="57" y="42" font-size="7" fill="#8b5a2b" text-anchor="middle" font-weight="700">RED</text>
+  <text x="57" y="51" font-size="7" fill="#8b5a2b" text-anchor="middle" font-weight="700">STARTING ZONE</text>
+  <text x="12" y="124" font-size="10" fill="#d62828" text-anchor="middle" font-weight="700">2</text>
+  <text x="12" y="196" font-size="10" fill="#1d4ed8" text-anchor="middle" font-weight="700">3</text>
+  <text x="12" y="274" font-size="10" fill="#d62828" text-anchor="middle" font-weight="700">2</text>
+  <text x="165" y="15.5" font-size="10" fill="#d62828" text-anchor="middle" font-weight="700">1</text>
+  <text x="165" y="66" font-size="5.5" fill="#1d4ed8" text-anchor="middle">BLUE LAUNCH ZONE</text>
+  <text x="213" y="25.5" font-size="4.5" fill="#1d4ed8">RELEASE LINE</text>
+  <text transform="translate(317 100) rotate(-90)" font-size="6" fill="#d62828" text-anchor="middle">RED SAFE ZONE</text>
+  <text x="312" y="11" font-size="5" text-anchor="middle">IP-A</text>
+  <text x="321" y="50" font-size="5" text-anchor="end">IP-B</text>
+  <text x="321" y="171" font-size="5" text-anchor="end">IP-C</text>
+  <text x="196" y="236" font-size="6" fill="#d62828" text-anchor="end">RED FLOATING BOARD</text>
+  <line x1="198" y1="234" x2="296" y2="268" stroke="#d62828" stroke-width="0.6"/>
+  <text transform="translate(394 100) rotate(90)" font-size="6.5" fill="#d62828" text-anchor="middle">RED FEEDER STATION (HUMAN PLAYERS, reserve CUBES)</text>
+
+  <!-- centre -->
+  <text x="-4" y="326" font-size="6" text-anchor="end">CENTER</text>
+  <text x="-4" y="333" font-size="6" text-anchor="end">LINE</text>
+
+  <!-- blue end labels (mirrored positions) -->
+  <text x="162" y="692" font-size="9" font-weight="700" fill="#1d4ed8" text-anchor="middle">BLUE ALLIANCE WALL</text>
+  <text x="33" y="664" font-size="6.5" fill="#1d4ed8" text-anchor="middle">DS1</text>
+  <text x="99" y="664" font-size="6.5" fill="#1d4ed8" text-anchor="middle">DS2</text>
+  <text x="231" y="664" font-size="6.5" fill="#1d4ed8" text-anchor="middle">DS3</text>
+  <text x="165" y="660" font-size="5" fill="#d62828" text-anchor="middle">RED VERTICAL</text>
+  <text x="165" y="666" font-size="5" fill="#d62828" text-anchor="middle">GOAL (Z ≥ 60 in.)</text>
+  <text x="57" y="601" font-size="7" fill="#8b5a2b" text-anchor="middle" font-weight="700">BLUE</text>
+  <text x="57" y="610" font-size="7" fill="#8b5a2b" text-anchor="middle" font-weight="700">STARTING ZONE</text>
+  <text x="12" y="532" font-size="10" fill="#1d4ed8" text-anchor="middle" font-weight="700">2</text>
+  <text x="12" y="460" font-size="10" fill="#d62828" text-anchor="middle" font-weight="700">3</text>
+  <text x="12" y="382" font-size="10" fill="#1d4ed8" text-anchor="middle" font-weight="700">2</text>
+  <text x="165" y="639.5" font-size="10" fill="#1d4ed8" text-anchor="middle" font-weight="700">1</text>
+  <text x="165" y="586" font-size="5.5" fill="#d62828" text-anchor="middle">RED LAUNCH ZONE</text>
+  <text x="213" y="625.5" font-size="4.5" fill="#d62828">RELEASE LINE</text>
+  <text transform="translate(317 548) rotate(-90)" font-size="6" fill="#1d4ed8" text-anchor="middle">BLUE SAFE ZONE</text>
+  <text x="312" y="641" font-size="5" text-anchor="middle">IP-A</text>
+  <text x="321" y="602" font-size="5" text-anchor="end">IP-B</text>
+  <text x="321" y="481" font-size="5" text-anchor="end">IP-C</text>
+  <text x="196" y="416" font-size="6" fill="#1d4ed8" text-anchor="end">BLUE FLOATING BOARD</text>
+  <line x1="198" y1="414" x2="296" y2="380" stroke="#1d4ed8" stroke-width="0.6"/>
+  <text transform="translate(394 548) rotate(90)" font-size="6.5" fill="#1d4ed8" text-anchor="middle">BLUE FEEDER STATION (HUMAN PLAYERS, reserve CUBES)</text>
+</svg>
+<figcaption>Figure 4-1 FIELD top view, to scale (1 drawing unit = 1 in.). Rectangles with numbers are HORIZONTAL GOALS: outline = 24 in. base, inner square = 11 in. THROAT. Numbers give the GOAL level and the colour gives the owner. Yellow squares are CUBES at staging positions. Dashed rectangles are LAUNCH ZONES, taped in the colour of the ALLIANCE that uses them. The hexagon symbol marks the VERTICAL GOAL, which is mounted on the ALLIANCE WALL above the opponent's GOAL 1.</figcaption>
+</figure>
+
+<figure class="fig-field">
+<svg viewBox="-54 -66 482 406" role="img" aria-label="Red end dimensioned">
+  <rect x="0" y="0" width="324" height="340" fill="#fbfbf7" stroke="none"/>
+  <line x1="0" y1="0" x2="324" y2="0" stroke="#111" stroke-width="2"/>
+  <line x1="0" y1="0" x2="0" y2="340" stroke="#111" stroke-width="2"/>
+  <line x1="324" y1="0" x2="324" y2="340" stroke="#111" stroke-width="2"/>
+  <line x1="0" y1="324" x2="324" y2="324" stroke="#9ca3af" stroke-width="1.5"/>
+  <use href="#end" style="--own:#d62828;--opp:#1d4ed8"/>
+  <line x1="0" y1="324" x2="48" y2="324" stroke="#8e44ad" stroke-width="2.5"/>
+  <text x="12" y="124" font-size="10" fill="#d62828" text-anchor="middle" font-weight="700">2</text>
+  <text x="12" y="196" font-size="10" fill="#1d4ed8" text-anchor="middle" font-weight="700">3</text>
+  <text x="12" y="274" font-size="10" fill="#d62828" text-anchor="middle" font-weight="700">2</text>
+  <text x="165" y="15.5" font-size="10" fill="#d62828" text-anchor="middle" font-weight="700">1</text>
+  <text x="57" y="40" font-size="6" fill="#8b5a2b" text-anchor="middle" font-weight="700">STARTING ZONE</text>
+  <text x="57" y="48" font-size="5.5" fill="#8b5a2b" text-anchor="middle">114 × 90 in. (2896 × 2286 mm)</text>
+  <text x="165" y="58" font-size="5" fill="#1d4ed8" text-anchor="middle">BLUE LAUNCH ZONE</text>
+  <text x="165" y="65" font-size="5" fill="#1d4ed8" text-anchor="middle">90 × 72 in. (2286 × 1829 mm)</text>
+  <text transform="translate(317 100) rotate(-90)" font-size="5" fill="#d62828" text-anchor="middle">SAFE ZONE 60 × 144 in.</text>
+  <text x="282" y="334" font-size="5" text-anchor="middle">84 in. (2134 mm)</text>
+  <text transform="translate(330 270) rotate(90)" font-size="5" text-anchor="middle">108 in. (2743 mm)</text>
+  <text transform="translate(276 266) rotate(-52.1)" font-size="4.5" text-anchor="middle">HANG RAIL 136.8 in.</text>
+  <text x="54" y="96" font-size="4.5" fill="#8e44ad">GUARDRAIL 48 in.</text>
+  <text x="54" y="330" font-size="4.5" fill="#8e44ad">GUARDRAIL 48 in.</text>
+
+  <!-- top ordinate ruler (X) -->
+  <line x1="0" y1="-38" x2="324" y2="-38" stroke="#111" stroke-width="0.6"/>
+  <g stroke="#111" stroke-width="0.6">
+    <line x1="0" y1="-41" x2="0" y2="-35"/><line x1="48" y1="-41" x2="48" y2="-35"/><line x1="114" y1="-41" x2="114" y2="-35"/><line x1="120" y1="-41" x2="120" y2="-35"/>
+    <line x1="153" y1="-41" x2="153" y2="-35"/><line x1="165" y1="-41" x2="165" y2="-35"/><line x1="177" y1="-41" x2="177" y2="-35"/><line x1="210" y1="-41" x2="210" y2="-35"/>
+    <line x1="264" y1="-41" x2="264" y2="-35"/><line x1="306" y1="-41" x2="306" y2="-35"/><line x1="318" y1="-41" x2="318" y2="-35"/><line x1="324" y1="-41" x2="324" y2="-35"/>
+  </g>
+  <g font-size="4.8">
+    <text transform="translate(1.7 -43) rotate(-90)">0</text><text transform="translate(49.7 -43) rotate(-90)">48</text><text transform="translate(115.7 -43) rotate(-90)">114</text><text transform="translate(121.7 -43) rotate(-90)">120</text>
+    <text transform="translate(154.7 -43) rotate(-90)">153</text><text transform="translate(166.7 -43) rotate(-90)">165 ℄</text><text transform="translate(178.7 -43) rotate(-90)">177</text><text transform="translate(211.7 -43) rotate(-90)">210</text>
+    <text transform="translate(265.7 -43) rotate(-90)">264</text><text transform="translate(307.7 -43) rotate(-90)">306</text><text transform="translate(319.7 -43) rotate(-90)">318</text><text transform="translate(325.7 -43) rotate(-90)">324</text>
+  </g>
+  <text x="-6" y="-37" font-size="5" text-anchor="end">X (in.)</text>
+
+  <!-- left ordinate ruler (Y) -->
+  <line x1="-14" y1="0" x2="-14" y2="324" stroke="#111" stroke-width="0.6"/>
+  <g stroke="#111" stroke-width="0.6">
+    <line x1="-17" y1="0" x2="-11" y2="0"/><line x1="-17" y1="72" x2="-11" y2="72"/><line x1="-17" y1="90" x2="-11" y2="90"/><line x1="-17" y1="108" x2="-11" y2="108"/><line x1="-17" y1="132" x2="-11" y2="132"/>
+    <line x1="-17" y1="180" x2="-11" y2="180"/><line x1="-17" y1="204" x2="-11" y2="204"/><line x1="-17" y1="258" x2="-11" y2="258"/><line x1="-17" y1="282" x2="-11" y2="282"/><line x1="-17" y1="324" x2="-11" y2="324"/>
+  </g>
+  <g font-size="4.8" text-anchor="end">
+    <text x="-19" y="1.7">0</text><text x="-19" y="73.7">72 (LZ)</text><text x="-19" y="91.7">90</text><text x="-19" y="109.7">108</text><text x="-19" y="133.7">132</text>
+    <text x="-19" y="181.7">180</text><text x="-19" y="205.7">204</text><text x="-19" y="259.7">258</text><text x="-19" y="283.7">282</text><text x="-19" y="325.7">324 ℄</text>
+  </g>
+  <text x="-14" y="-6" font-size="5" text-anchor="middle">Y (in.)</text>
+
+  <!-- right ordinate ruler (Y) -->
+  <line x1="390" y1="0" x2="390" y2="324" stroke="#111" stroke-width="0.6"/>
+  <g stroke="#111" stroke-width="0.6">
+    <line x1="387" y1="0" x2="393" y2="0"/><line x1="387" y1="54" x2="393" y2="54"/><line x1="387" y1="66" x2="393" y2="66"/><line x1="387" y1="144" x2="393" y2="144"/>
+    <line x1="387" y1="174" x2="393" y2="174"/><line x1="387" y1="186" x2="393" y2="186"/><line x1="387" y1="204" x2="393" y2="204"/><line x1="387" y1="216" x2="393" y2="216"/><line x1="387" y1="324" x2="393" y2="324"/>
+  </g>
+  <g font-size="4.8">
+    <text x="395" y="1.7">0</text><text x="395" y="54.7">54</text><text x="395" y="67.7">66 (IP-B)</text><text x="395" y="145.7">144</text>
+    <text x="395" y="174.7">174</text><text x="395" y="187.7">186 (IP-C)</text><text x="395" y="205.7">204</text><text x="395" y="217.7">216</text><text x="395" y="325.7">324</text>
+  </g>
+</svg>
+<figcaption>Figure 4-2 Red end, dimensioned. Rulers give absolute coordinates in inches from origin O. The blue end is the mirror image: Y<sub>blue</sub> = 648 − Y<sub>red</sub>.</figcaption>
+</figure>
+
+<h3>4.2 FIELD BORDER and ALLIANCE WALLS</h3>
+<ul>
+  <li><b>FIELD BORDER</b>: 20 in. (508 mm) tall clear polycarbonate on both long sides. The GOAL-SIDE border (X = 0) carries GOALS 2 and 3 and has openings behind them for their internal ramps. Each GOAL 1 discharges through its adjacent ALLIANCE WALL. The FEEDER-SIDE border (X = 324 in.) has IP-B and IP-C for each ALLIANCE.</li>
+  <li><b>ALLIANCE WALL</b> (per ALLIANCE, from X = 0):
+    <table>
+      <tr><th>Segment</th><th class="n">X range (in.)</th><th>Height</th><th>Contents</th></tr>
+      <tr><td>DRIVER STATION 1</td><td class="n">0 – 66</td><td>78 in. (1981 mm)</td><td>Behind the STARTING ZONE</td></tr>
+      <tr><td>DRIVER STATION 2</td><td class="n">66 – 132</td><td>78 in.</td><td></td></tr>
+      <tr><td>VERTICAL GOAL section</td><td class="n">132 – 198</td><td>60 in. (1524 mm) solid wall, with the <i>opponent's</i> VERTICAL GOAL frame on top</td><td>Own GOAL 1 stands in front (Section 4.6)</td></tr>
+      <tr><td>DRIVER STATION 3</td><td class="n">198 – 264</td><td>78 in.</td><td></td></tr>
+      <tr><td>FEEDER corner</td><td class="n">264 – 324</td><td>78 in.</td><td>IP-A opening (X 306 – 318); closes the SAFE ZONE</td></tr>
+    </table>
+  </li>
+  <li>DRIVER STATION structure, OPERATOR CONSOLE shelf, E-Stop/A-Stop and team signs are as in the 2025 ARENA.</li>
+</ul>
+
+<h3>4.3 GUARDRAILS</h3>
+<p>GUARDRAILS are 2 in. (51 mm) thick and 20 in. (508 mm) tall and are fixed to the carpet. Neither ROBOTS nor CUBES can pass through them.</p>
+<table>
+  <tr><th>GUARDRAIL</th><th>Red end</th><th>Blue end</th><th>Purpose</th></tr>
+  <tr><td>Starting guardrail</td><td>Y = 90, X 0 – 48</td><td>Y = 558, X 0 – 48</td><td>Separates the STARTING ZONE from the near GOAL 2; stops ROBOTS approaching the goal row along the wall from the corner</td></tr>
+  <tr><td>Center guardrail (shared)</td><td colspan="2">Y = 324, X 0 – 48</td><td>Splits the goal row at the CENTER LINE; the two GOAL 2s nearest the CENTER LINE cannot be reached across it along the wall</td></tr>
+  <tr><td>SAFE ZONE guardrail</td><td>X = 264, Y 0 – 144</td><td>X = 264, Y 504 – 648</td><td>Forms the SAFE ZONE lane; the lane can only be entered through its dashed end (Y = 144 red / 504 blue)</td></tr>
+</table>
+
+<h3>4.4 ZONES</h3>
+<table>
+  <tr><th>ZONE</th><th>Red</th><th>Blue</th><th>Tape</th><th>Notes</th></tr>
+  <tr><td>STARTING ZONE</td><td>X 0 – 114, Y 0 – 90</td><td>X 0 – 114, Y 558 – 648</td><td>Brown</td><td>Holds all 3 ROBOTS at MATCH start (G303)</td></tr>
+  <tr><td>LAUNCH ZONE</td><td>X 120 – 210, Y 576 – 648 <i>(at blue wall)</i></td><td>X 120 – 210, Y 0 – 72 <i>(at red wall)</i></td><td>Owner colour, dashed</td><td>Contains the opponent's GOAL 1. Not protected. Opponents inside it must stay at or below 48 in. (G416)</td></tr>
+  <tr><td>SAFE ZONE</td><td>X 264 – 324, Y 0 – 144</td><td>X 264 – 324, Y 504 – 648</td><td>Owner colour, dashed across the open end</td><td>Opponents may not enter (G420); ROBOTS inside are protected (G427)</td></tr>
+</table>
+
+<h3>4.5 HORIZONTAL GOALS</h3>
+<p>Each ALLIANCE owns four HORIZONTAL GOALS: one GOAL 1, two GOAL 2s and one GOAL 3. All four share the same construction and differ only in RIM height and location.</p>
+<table>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Base footprint</td><td>24 × 24 in. (610 × 610 mm), fixed to the carpet</td></tr>
+  <tr><td>THROAT (opening)</td><td>11 × 11 in. (279 × 279 mm) square, sides parallel to the FIELD axes, straight for 6 in. (152 mm) below the RIM</td></tr>
+  <tr><td>ROOF</td><td>Pyramidal, falling 5.5 in. (140 mm) from the RIM to the outer base edge (≈ 40°). CUBES that miss the THROAT slide off.</td></tr>
+  <tr><td>Clearance</td><td>1 in. (25 mm) per side for an aligned CUBE. A CUBE rotated about the vertical axis fits only within about ±14.8° (9·(cos θ + sin θ) ≤ 11). A CUBE turned 45° measures 12.7 in. across its diagonal and cannot enter (Figure 4-3).</td></tr>
+  <tr><td>Delivery</td><td>From above only: dropped or LAUNCHED. The THROAT cannot be entered from the side.</td></tr>
+  <tr><td>After scoring</td><td>An internal ramp carries the CUBE into that goal's SCORE BIN outside the FIELD. GOALS 2 and 3 discharge through the GOAL-SIDE FIELD BORDER; GOAL 1 turns toward and discharges through a 12 × 12 in. (305 × 305 mm) opening in the adjacent ALLIANCE WALL directly behind its base. The wall opening is covered by the goal structure and is inaccessible to ROBOTS. Every scored CUBE stays in its bin until the end of the MATCH and cannot be de-scored.</td></tr>
+  <tr><td>Detection</td><td>Beam-break sensor plane 3 in. (76 mm) below the RIM, with REFEREE confirmation</td></tr>
+</table>
+<table>
+  <tr><th>Goal</th><th class="n">RIM height</th><th>Red goals (centre X, Y)</th><th>Blue goals (centre X, Y)</th></tr>
+  <tr><td>GOAL 1 (low)</td><td class="n">18 in. (457 mm)</td><td>(165, 12) – against the red wall, inside the <span class="blue">blue</span> LAUNCH ZONE</td><td>(165, 636) – against the blue wall, inside the <span class="red">red</span> LAUNCH ZONE</td></tr>
+  <tr><td>GOAL 2 near (mid)</td><td class="n">38 in. (965 mm)</td><td>(12, 120)</td><td>(12, 528)</td></tr>
+  <tr><td>GOAL 2 center (mid)</td><td class="n">38 in. (965 mm)</td><td>(12, 270)</td><td>(12, 378)</td></tr>
+  <tr><td>GOAL 3 (high)</td><td class="n">60 in. (1524 mm)</td><td>(12, 456) – <i>in the blue half</i></td><td>(12, 192) – <i>in the red half</i></td></tr>
+</table>
+<p>Along the GOAL-SIDE border, from the red wall, the goals are: red 2 · blue 3 · red 2 | CENTER LINE | blue 2 · red 3 · blue 2. Each ALLIANCE's GOAL 1 and both GOAL 2s are in its own half. Its GOAL 3 and its VERTICAL GOAL are in the opponent's half.</p>
+
+<figure>
+<svg viewBox="0 0 232 84" role="img" aria-label="Goal throat details">
+  <!-- A: aligned -->
+  <rect x="6" y="14" width="24" height="24" fill="#fff" stroke="#d62828" stroke-width="0.8"/>
+  <rect x="12.5" y="20.5" width="11" height="11" fill="#fde2e2" stroke="#d62828" stroke-width="0.5"/>
+  <rect x="13.5" y="21.5" width="9" height="9" fill="#f5c400" stroke="#8a6d00" stroke-width="0.4"/>
+  <text x="18" y="9" font-size="3.6" text-anchor="middle" font-weight="700">A. 0° – fits</text>
+  <text x="18" y="44" font-size="3" text-anchor="middle">1 in. clearance per side</text>
+  <!-- B: 45 degrees -->
+  <rect x="46" y="14" width="24" height="24" fill="#fff" stroke="#d62828" stroke-width="0.8"/>
+  <rect x="52.5" y="20.5" width="11" height="11" fill="#fde2e2" stroke="#d62828" stroke-width="0.5"/>
+  <polygon points="58,19.64 64.36,26 58,32.36 51.64,26" fill="#f5c400" fill-opacity=".85" stroke="#b91c1c" stroke-width="0.6"/>
+  <text x="58" y="9" font-size="3.6" text-anchor="middle" font-weight="700">B. 45° – blocked</text>
+  <text x="58" y="44" font-size="3" text-anchor="middle">12.7 in. diagonal &gt; 11 in.</text>
+  <!-- C: limit -->
+  <rect x="86" y="14" width="24" height="24" fill="#fff" stroke="#d62828" stroke-width="0.8"/>
+  <rect x="92.5" y="20.5" width="11" height="11" fill="#fde2e2" stroke="#d62828" stroke-width="0.5"/>
+  <rect x="93.5" y="21.5" width="9" height="9" fill="#f5c400" stroke="#8a6d00" stroke-width="0.4" transform="rotate(14.8 98 26)"/>
+  <text x="98" y="9" font-size="3.6" text-anchor="middle" font-weight="700">C. limit ≈ ±14.8°</text>
+  <text x="98" y="44" font-size="3" text-anchor="middle">(rigid cube, no tilt)</text>
+  <text x="58" y="54" font-size="3.2" text-anchor="middle">Top views: 24 in. base, 11 in. THROAT, 9 in. CUBE</text>
+
+  <!-- D: section through a GOAL 2 -->
+  <line x1="126" y1="76" x2="230" y2="76" stroke="#111" stroke-width="0.8"/>
+  <text x="229" y="81" font-size="3" text-anchor="end">carpet</text>
+  <!-- field border (goal-side), 20 in. tall -->
+  <line x1="158" y1="56" x2="158" y2="76" stroke="#111" stroke-width="1.4"/>
+  <text x="157" y="81" font-size="2.8" text-anchor="middle">FIELD BORDER (20 in.)</text>
+  <!-- goal body (wall opening where the ramp exits) -->
+  <polyline points="160,50 160,43.5 166.5,38 166.5,44" fill="none" stroke="#d62828" stroke-width="0.9"/>
+  <line x1="160" y1="56" x2="160" y2="76" stroke="#d62828" stroke-width="0.9"/>
+  <polyline points="184,76 184,43.5 177.5,38 177.5,44" fill="none" stroke="#d62828" stroke-width="0.9"/>
+  <!-- ramp -->
+  <line x1="177.5" y1="45" x2="132" y2="64" stroke="#6b7280" stroke-width="1"/>
+  <!-- bin -->
+  <polyline points="128,60 128,76 156,76 156,62" fill="none" stroke="#6b7280" stroke-width="0.8"/>
+  <rect x="131" y="67" width="9" height="9" fill="#f5c400" stroke="#8a6d00" stroke-width="0.4"/>
+  <rect x="167.5" y="27" width="9" height="9" fill="#f5c400" stroke="#8a6d00" stroke-width="0.4"/>
+  <line x1="172" y1="21" x2="172" y2="26" stroke="#111" stroke-width="0.4" marker-end="url(#arS)"/>
+  <line x1="164" y1="41" x2="180" y2="41" stroke="#10b981" stroke-width="0.5" stroke-dasharray="1 0.8"/>
+  <!-- rim dimension -->
+  <line x1="194" y1="76" x2="194" y2="38" stroke="#111" stroke-width="0.35" marker-start="url(#arS)" marker-end="url(#arS)"/>
+  <line x1="178" y1="38" x2="196" y2="38" stroke="#111" stroke-width="0.25" stroke-dasharray="1 1"/>
+  <text x="196" y="58" font-size="3">RIM height</text>
+  <text x="196" y="62" font-size="2.8">18 / 38 / 60 in.</text>
+  <text x="186" y="37" font-size="2.8">RIM</text>
+  <text x="186" y="41.8" font-size="2.6" fill="#047857">sensor (RIM − 3 in.)</text>
+  <text x="186" y="47" font-size="2.6">THROAT 11 in., 6 in. deep</text>
+  <text x="186" y="33.5" font-size="2.6">ROOF ≈ 40°</text>
+  <text x="142" y="58" font-size="2.6" text-anchor="middle">SCORE BIN</text>
+  <text x="142" y="61" font-size="2.3" text-anchor="middle">(outside FIELD)</text>
+  <text x="146" y="52" font-size="2.4" text-anchor="middle" fill="#6b7280">internal ramp</text>
+  <text x="165" y="18" font-size="3.6" text-anchor="middle" font-weight="700">D. Section (GOAL 2 shown)</text>
+</svg>
+<figcaption>Figure 4-3 HORIZONTAL GOAL details. A–C: effect of CUBE yaw on entry. D: GOAL 2 section showing the RIM, THROAT, sensor plane, internal ramp and SCORE BIN. GOAL 1 has the same intake geometry at its 18 in. RIM, but its ramp turns through the adjacent ALLIANCE WALL as specified in 4.5.</figcaption>
+</figure>
+
+<h3>4.6 VERTICAL GOALS and LAUNCH ZONES</h3>
+<ul>
+  <li>Each ALLIANCE has one VERTICAL GOAL, mounted on top of the 60 in. section of the <b>opponent's</b> ALLIANCE WALL. The <span class="blue">blue</span> VERTICAL GOAL is on the <span class="red">red</span> wall, and the reverse.</li>
+  <li>The opening is a regular hexagon with vertices at top and bottom, 30 in. (762 mm) across the flats (width) and 34.6 in. (880 mm) from vertex to vertex (height). Its centre is at X = 165 in. The lowest vertex is <b>60 in. (1524 mm)</b> above the carpet, the same height as the GOAL 3 RIM, and the top vertex is 94.6 in. (2403 mm). The opening plane is flush with the field-side face of the ALLIANCE WALL.</li>
+  <li>Behind the opening, a capture net and chute hold scored CUBES out of the FIELD until the end of the MATCH. A sensor array in the chute counts them.</li>
+  <li>The owner's <b>LAUNCH ZONE</b> (90 × 72 in.) is directly in front of it. The <b>opponent's GOAL 1</b> (24 × 24 in. base, X 153 – 177, Y 0 – 24 at the red wall) stands inside that LAUNCH ZONE, directly under the opening. A dashed <b>RELEASE LINE</b> spans the LAUNCH ZONE 24 in. (610 mm) fieldward of the opening plane, aligned with the fieldward edge of GOAL 1. G410 requires the delivering ROBOT's BUMPERS to intersect its LAUNCH ZONE, the whole CUBE to be fieldward of the RELEASE LINE when released, and the CUBE to travel unsupported through the opening. The blocker and RELEASE LINE therefore prevent adjacent placement.</li>
+</ul>
+
+<figure>
+<svg viewBox="0 -110 600 126" role="img" aria-label="Elevation of heights">
+  <!-- reference lines -->
+  <g stroke-width="0.4" stroke-dasharray="3 2">
+    <line x1="10" y1="-32" x2="440" y2="-32" stroke="#10b981"/>
+    <line x1="10" y1="-42" x2="440" y2="-42" stroke="#6b7280"/>
+    <line x1="10" y1="-48" x2="440" y2="-48" stroke="#f59e0b"/>
+    <line x1="10" y1="-60" x2="440" y2="-60" stroke="#111"/>
+    <line x1="10" y1="-78" x2="440" y2="-78" stroke="#b91c1c"/>
+  </g>
+  <g font-size="4.3">
+    <text x="443" y="-30.5" fill="#047857">32 in. (813 mm) FLOATING BOARD clearance</text>
+    <text x="443" y="-40.5" fill="#374151">42 in. (1067 mm) STARTING CONFIG. max (R104)</text>
+    <text x="443" y="-46.5" fill="#b45309">48 in. (1219 mm) max in opp. LAUNCH ZONE (G416)</text>
+    <text x="443" y="-58.5">60 in. (1524 mm) GOAL 3 RIM = VERTICAL GOAL bottom</text>
+    <text x="443" y="-76.5" fill="#b91c1c">78 in. (1981 mm) max ROBOT height (R106)</text>
+  </g>
+  <line x1="0" y1="0" x2="440" y2="0" stroke="#111" stroke-width="1"/>
+
+  <!-- GOAL 1 -->
+  <polygon points="30,0 30,-12.5 36.5,-18 36.5,-12 47.5,-12 47.5,-18 54,-12.5 54,0" fill="#fde2e2" stroke="#d62828" stroke-width="0.8"/>
+  <text x="42" y="8" font-size="4.5" text-anchor="middle" font-weight="700">GOAL 1</text>
+  <text x="42" y="-21" font-size="4" text-anchor="middle">RIM 18 in. (457)</text>
+  <!-- GOAL 2 -->
+  <polygon points="80,0 80,-32.5 86.5,-38 86.5,-32 97.5,-32 97.5,-38 104,-32.5 104,0" fill="#fde2e2" stroke="#d62828" stroke-width="0.8"/>
+  <text x="92" y="8" font-size="4.5" text-anchor="middle" font-weight="700">GOAL 2</text>
+  <text x="92" y="-50.5" font-size="4" text-anchor="middle">RIM 38 in. (965)</text>
+  <!-- GOAL 3 + two cubes -->
+  <polygon points="130,0 130,-54.5 136.5,-60 136.5,-54 147.5,-54 147.5,-60 154,-54.5 154,0" fill="#fde2e2" stroke="#d62828" stroke-width="0.8"/>
+  <rect x="137.5" y="-69" width="9" height="9" fill="#f5c400" stroke="#8a6d00" stroke-width="0.4"/>
+  <rect x="137.5" y="-78" width="9" height="9" fill="#f5c400" stroke="#8a6d00" stroke-width="0.4"/>
+  <text x="142" y="8" font-size="4.5" text-anchor="middle" font-weight="700">GOAL 3</text>
+  <text x="158" y="-67" font-size="3.8">2 CUBES above RIM</text>
+  <text x="158" y="-62.5" font-size="3.8">= 60 + 2 × 9 = 78 in.</text>
+
+  <!-- VERTICAL GOAL front elevation -->
+  <rect x="207" y="-60" width="66" height="60" fill="#e5e7eb" stroke="#6b7280" stroke-width="0.8"/>
+  <rect x="219" y="-100" width="42" height="40" fill="#dbeafe" stroke="#1d4ed8" stroke-width="0.8"/>
+  <polygon points="240,-60 255,-68.66 255,-85.98 240,-94.64 225,-85.98 225,-68.66" fill="#fff" stroke="#1d4ed8" stroke-width="1"/>
+  <polygon points="228,0 228,-12.5 234.5,-18 234.5,-12 245.5,-12 245.5,-18 252,-12.5 252,0" fill="#fde2e2" stroke="#d62828" stroke-width="0.8" fill-opacity=".9"/>
+  <text x="240" y="-77" font-size="3.8" text-anchor="middle" fill="#1d4ed8">30 in. flats</text>
+  <text x="240" y="-72.5" font-size="3.8" text-anchor="middle" fill="#1d4ed8">34.6 in. tall</text>
+  <text x="240" y="-103" font-size="3.8" text-anchor="middle" fill="#1d4ed8">top vertex 94.6 in.</text>
+  <text x="240" y="-30" font-size="3.6" text-anchor="middle">ALLIANCE WALL section</text>
+  <text x="240" y="-26" font-size="3.6" text-anchor="middle">(60 in. tall)</text>
+  <text x="240" y="8" font-size="4.5" text-anchor="middle" font-weight="700">VERTICAL GOAL (front view)</text>
+  <text x="240" y="13.5" font-size="3.6" text-anchor="middle">opponent's GOAL 1 in front</text>
+
+  <!-- FLOATING BOARD section -->
+  <rect x="330" y="-33.5" width="84" height="1.5" fill="#d62828"/>
+  <circle cx="330" cy="-33" r="0.83" fill="#111"/>
+  <line x1="414" y1="0" x2="414" y2="-20" stroke="#111" stroke-width="1.2"/>
+  <polyline points="418,0 418,-44 404,-44 404,-33.5" fill="none" stroke="#6b7280" stroke-width="1.2"/>
+  <rect x="360" y="-30" width="36" height="30" fill="#10b981" fill-opacity=".15" stroke="#10b981" stroke-width="0.6" stroke-dasharray="2 1.2"/>
+  <text x="378" y="-16" font-size="3.8" text-anchor="middle">short ROBOT</text>
+  <text x="378" y="-11.5" font-size="3.8" text-anchor="middle">fits UNDER</text>
+  <rect x="296" y="-78" width="30" height="78" fill="none" stroke="#b91c1c" stroke-width="0.6" stroke-dasharray="2 1.2"/>
+  <text x="311" y="-70" font-size="3.6" text-anchor="middle">tall ROBOT</text>
+  <text x="311" y="-66" font-size="3.6" text-anchor="middle">HANGs on rail</text>
+  <text x="372" y="-36.5" font-size="3.6" text-anchor="middle">1.5 in. plate, top 33.5 in.</text>
+  <text x="328" y="-50" font-size="3.4" text-anchor="start">HANG RAIL ℄ 33 in.</text>
+  <line x1="330" y1="-49" x2="330" y2="-35" stroke="#111" stroke-width="0.3"/>
+  <text x="419" y="-54" font-size="3.4" text-anchor="middle">support (outside FIELD)</text>
+  <text x="372" y="8" font-size="4.5" text-anchor="middle" font-weight="700">FLOATING BOARD (section)</text>
+</svg>
+<figcaption>Figure 4-4 Height elevation (to scale vertically; elements placed side by side, not at their FIELD positions). All goal heights, the FLOATING BOARD clearance and the ROBOT height limits are shown on one scale.</figcaption>
+</figure>
+
+<h3>4.7 FLOATING BOARDS</h3>
+<ul>
+  <li>Each ALLIANCE has one FLOATING BOARD on its own half. It is a right-triangle plate with legs of <b>108 in. (2743 mm)</b> along the FEEDER-SIDE border and <b>84 in. (2134 mm)</b> along the CENTER LINE. Red board vertices: (324, 216), (324, 324), (240, 324). Blue board: (324, 432), (324, 324), (240, 324). The two boards together form one larger triangle and meet at the CENTER LINE with a gap of 1 in. or less.</li>
+  <li>The plate is 1.5 in. (38 mm) thick. Its underside is <b>32 in. (813 mm)</b> above the carpet, which is the minimum clearance under the board and rail, and its top is 33.5 in. (851 mm).</li>
+  <li>A HANG RAIL (1.66 in. OD) runs the full 136.8 in. (3475 mm) of the hypotenuse, with its centreline 33 in. above the carpet. This is the only face of the board exposed to the FIELD.</li>
+  <li>The boards are cantilevered from a steel frame outside the FEEDER-SIDE border. <b>There are no supports inside the FIELD</b>, so the area under each board is open carpet. The design load is at least 600 lb (272 kg) static per board.</li>
+  <li>Largest square footprint that fits fully under one board: 84·108/(84+108) = <b>47.25 in. (1200 mm)</b>. A typical ROBOT is about 36–38 in. square including BUMPERS, so only <b>one</b> fits fully UNDER a board. Two ROBOTS side by side would each need to be 32.9 in. square or smaller.</li>
+</ul>
+
+<figure class="fig-small">
+<svg viewBox="218 196 156 152" role="img" aria-label="Floating board detail">
+  <rect x="218" y="196" width="106" height="152" fill="#fbfbf7"/>
+  <polygon points="324,324 324,348 258.7,348" fill="#1d4ed8" fill-opacity=".25"/>
+  <line x1="324" y1="196" x2="324" y2="348" stroke="#111" stroke-width="1.6"/>
+  <line x1="218" y1="324" x2="324" y2="324" stroke="#9ca3af" stroke-width="1"/>
+  <polygon points="324,216 324,324 240,324" fill="#d62828" fill-opacity=".45" stroke="#d62828" stroke-width="0.8"/>
+  <line x1="240" y1="324" x2="324" y2="216" stroke="#111" stroke-width="1.66"/>
+  <use href="#cube" x="285.5" y="285.5"/><use href="#cube" x="305.5" y="285.5"/>
+  <use href="#cube" x="285.5" y="305.5"/><use href="#cube" x="305.5" y="305.5"/>
+  <rect x="276.75" y="276.75" width="47.25" height="47.25" fill="none" stroke="#111" stroke-width="0.4" stroke-dasharray="1.5 1"/>
+  <rect x="286" y="286" width="38" height="38" fill="#10b981" fill-opacity=".25" stroke="#047857" stroke-width="0.8"/>
+  <rect x="286" y="248" width="38" height="38" fill="none" stroke="#b91c1c" stroke-width="0.8" stroke-dasharray="2 1.2"/>
+  <rect x="247.4" y="239.1" width="36" height="36" fill="#6b7280" fill-opacity=".25" stroke="#374151" stroke-width="0.8" transform="rotate(-52.1 265.4 257.1)"/>
+  <text x="305" y="318" font-size="4" text-anchor="middle" fill="#065f46" font-weight="700">A: UNDER</text>
+  <text x="305" y="264" font-size="3.6" text-anchor="middle" fill="#b91c1c">B: 2nd ROBOT</text>
+  <text x="305" y="268.5" font-size="3.6" text-anchor="middle" fill="#b91c1c">overhangs</text>
+  <text x="265" y="258" font-size="3.8" text-anchor="middle" font-weight="700">C: HANG</text>
+  <text x="282" y="339" font-size="3" text-anchor="middle">dashed square: 47.25 in. max footprint</text>
+  <text x="282" y="333" font-size="4" text-anchor="middle">84 in.</text>
+  <text transform="translate(330 270) rotate(90)" font-size="4" text-anchor="middle">108 in.</text>
+  <text transform="translate(247 290) rotate(-52.1)" font-size="3.6" text-anchor="middle">HANG RAIL 136.8 in.</text>
+  <text x="228" y="344" font-size="3.6" fill="#1d4ed8">blue board →</text>
+  <text x="222" y="330" font-size="3.4" fill="#6b7280">CENTER LINE</text>
+  <text x="340" y="220" font-size="3.6">FEEDER-SIDE</text>
+  <text x="340" y="225" font-size="3.6">FIELD BORDER</text>
+  <text x="340" y="232" font-size="3.4" fill="#6b7280">(support frame</text>
+  <text x="340" y="236.5" font-size="3.4" fill="#6b7280">outside)</text>
+</svg>
+<figcaption>Figure 4-5 Red FLOATING BOARD, top view, to scale. A: one 38 × 38 in. ROBOT fits fully UNDER. B: a second ROBOT of that size overhangs the edge. C: a HANGING ROBOT on the HANG RAIL, clear of the UNDER position. The dashed square is the 47.25 in. theoretical maximum footprint.</figcaption>
+</figure>
+
+<h3>4.8 INTRODUCTION POINTS and FEEDER STATION</h3>
+<ul>
+  <li>Each INTRODUCTION POINT is a 12 × 12 in. (305 × 305 mm) opening at carpet level. On the outside it has a 24 in. long ramp at about 20°. A HUMAN PLAYER sets a CUBE on the ramp and releases it, and the CUBE slides onto the carpet.</li>
+  <li>IPs are not used in AUTO (G404).</li>
+</ul>
+<table>
+  <tr><th>IP</th><th>Red location</th><th>Blue location</th><th>Enters</th><th>Protection</th></tr>
+  <tr><td>IP-A</td><td>ALLIANCE WALL, X 306 – 318</td><td>ALLIANCE WALL, X 306 – 318</td><td>SAFE ZONE (moving along the lane)</td><td>Protected</td></tr>
+  <tr><td>IP-B</td><td>FEEDER-SIDE border, Y 54 – 66</td><td>Y 582 – 594</td><td>SAFE ZONE (moving across the lane)</td><td>Protected</td></tr>
+  <tr><td>IP-C</td><td>FEEDER-SIDE border, Y 174 – 186</td><td>Y 462 – 474</td><td>Open FIELD, outside the SAFE ZONE</td><td><b>Not protected</b>; opponents may collect these CUBES</td></tr>
+</table>
+<p>The FEEDER STATION runs 204 in. along the FEEDER-SIDE border from the ALLIANCE WALL and wraps around the corner. Each ALLIANCE may station up to <b>2 HUMAN PLAYERS</b> there, taken from the DRIVE TEAM roles of 2025 Table 6-1.</p>
+
+<h3>4.9 SCORING ELEMENT: CUBE</h3>
+<div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+<svg viewBox="0 0 70 52" style="width:210px;border:1px solid #e5e7eb" role="img" aria-label="Cube">
+  <polygon points="12,20 32,20 32,40 12,40" fill="#f5c400" stroke="#8a6d00" stroke-width="0.6"/>
+  <polygon points="12,20 22,12 42,12 32,20" fill="#fde047" stroke="#8a6d00" stroke-width="0.6"/>
+  <polygon points="32,20 42,12 42,32 32,40" fill="#d4a600" stroke="#8a6d00" stroke-width="0.6"/>
+  <line x1="12" y1="45" x2="32" y2="45" stroke="#111" stroke-width="0.35" marker-start="url(#arS)" marker-end="url(#arS)"/>
+  <text x="22" y="50" font-size="3.8" text-anchor="middle">9.0 in. (229 mm)</text>
+  <text x="46" y="24" font-size="3.4">solid foam</text>
+  <text x="46" y="28.5" font-size="3.4">all edges 9 in.</text>
+</svg>
+<table style="flex:1;min-width:320px">
+  <tr><th>Property</th><th>Value</th></tr>
+  <tr><td>Shape</td><td>Solid cube with lightly radiused edges (≤ 0.25 in.)</td></tr>
+  <tr><td>Edge length</td><td>9.0 in. ± 0.25 in. (229 ± 6 mm)</td></tr>
+  <tr><td>Material</td><td>Closed-cell polyethylene foam, yellow; the same concept as the FTC <i>RELIC RECOVERY</i> glyph (a foam cube of about 6 in.), scaled up 1.5×</td></tr>
+  <tr><td>Mass (estimate)</td><td>≈ 0.7 lb (≈ 325 g) at a nominal 1.7 lb/ft³ density; to be confirmed with a prototype</td></tr>
+  <tr><td>Why 9 in.</td><td>A legal ROBOT (≤ 120 in. perimeter, e.g. 30 × 30 in. frame) can reasonably carry 4 in a 2 × 2 or 1 × 4 arrangement, which matches the CONTROL limit of 4 (G409). Two CUBE heights (18 in.) are the headroom above GOAL 3 (R106).</td></tr>
+</table>
+</div>
+
+<h3>4.10 CUBE staging</h3>
+<p>FIELD STAFF stage <b>116 CUBES</b> before each MATCH. Coordinates are CUBE centres for the red half; for blue, use Y → 648 − Y.</p>
+<table>
+  <tr><th>Location</th><th class="n">Per ALLIANCE half</th><th class="n">Total</th><th>Red-half positions (X; Y), in.</th></tr>
+  <tr><td>CENTER LINE rows</td><td class="n">14</td><td class="n">28</td><td>X = 84, 108, 132, 156, 180, 204, 228; Y = 288, 312 (blue: 336, 360)</td></tr>
+  <tr><td>SAFE ZONE lane</td><td class="n">10</td><td class="n">20</td><td>X = 276, 300; Y = 24, 48, 72, 96, 120 (a 19 in. corridor at X &gt; 304.5 is left clear for IP-A and IP-B)</td></tr>
+  <tr><td>Beside IP-C</td><td class="n">4</td><td class="n">8</td><td>X = 276, 300; Y = 168, 192</td></tr>
+  <tr><td>Under FLOATING BOARD</td><td class="n">4</td><td class="n">8</td><td>X = 290, 310; Y = 290, 310</td></tr>
+  <tr><td>FEEDER STATION reserve (includes optional preloads)</td><td class="n">26</td><td class="n">52</td><td>Outside the FIELD. Each ROBOT may preload 1 taken from its ALLIANCE's reserve (G303-H).</td></tr>
+  <tr><th>Total</th><th class="n">58</th><th class="n">116</th><th>64 on the FIELD at MATCH start (plus up to 6 preloaded)</th></tr>
+</table>
+<p>CUBES that leave the FIELD other than by scoring are returned by FIELD STAFF, when it is safe, to the FEEDER STATION of the ALLIANCE whose half they left from.</p>
+
+<h3>4.11 Vision targets</h3>
+<p>AprilTags (36h11 family, 6.5 in.) are planned on each HORIZONTAL GOAL face, around each VERTICAL GOAL, at each IP and on the FLOATING BOARD support. IDs and exact poses are <i>TBD</i> in this draft.</p>
+
+<!-- ======================================================= 5 -->
+<h2 id="s5">5 MATCH play &amp; scoring</h2>
+
+<h3>5.1 MATCH phases</h3>
+<table>
+  <tr><th>Phase</th><th>Duration</th><th>Notes</th></tr>
+  <tr><td>AUTO</td><td>0:15</td><td>No DRIVE TEAM control. HUMAN PLAYERS may not introduce CUBES. Points are the same as in TELEOP.</td></tr>
+  <tr><td>(transition)</td><td>—</td><td>As in 2025, goal scoring is assessed for 3 s after the AUTO timer reaches 0:00, and those CUBES count as AUTO.</td></tr>
+  <tr><td>TELEOP</td><td>2:15</td><td>DRIVERS control ROBOTS. HUMAN PLAYERS may introduce CUBES through their IPs.</td></tr>
+  <tr><td>ENDGAME</td><td>last 0:20 of TELEOP</td><td>FLOATING BOARD protections apply (G419, G428).</td></tr>
+</table>
+
+<h3>5.2 Scoring assessment</h3>
+<p>Goal counts are updated throughout the MATCH and for up to 3 s after the timer reaches 0:00 at the end of AUTO and at the end of TELEOP. HANG and UNDER are assessed 3 s after the end of the MATCH, or when all ROBOTS have come to rest, whichever is first (2025 §6.5).</p>
+
+<h3>5.3 Scoring criteria</h3>
+<h4>5.3.1 HORIZONTAL GOALS</h4>
+<p>A CUBE is scored in a HORIZONTAL GOAL once it has passed completely below the goal's sensor plane (RIM − 3 in.). It counts for the goal's owner, whichever ROBOT delivered it. CUBES resting on a ROOF, or stuck in the THROAT above the sensor plane, are not scored. Scored CUBES stay in the SCORE BIN and cannot be de-scored.</p>
+<h4>5.3.2 VERTICAL GOAL</h4>
+<p>A CUBE is scored in a VERTICAL GOAL only when a ROBOT of that goal's owning ALLIANCE makes a legal G410 delivery and the CUBE passes completely through the hexagonal opening into the capture chute. A CUBE delivered by the opponent or in violation of G410 is not scored, earns no MATCH points, and does not advance the SKYFORGE RP. FIELD STAFF remove such a CUBE from the capture chute after the MATCH.</p>
+<h4>5.3.3 ENDGAME states (assessed at the end of the MATCH)</h4>
+<ul>
+  <li><b>HANG</b>: the ROBOT is in contact with its own ALLIANCE's FLOATING BOARD (including the HANG RAIL) and not in contact with the carpet. It may also contact only: CUBES; another ROBOT that qualifies for HANG; a partner ROBOT contacted by an opponent in violation of G428; and opponent ROBOTS. (Adapted from the 2025 CAGE criteria.) Being supported on top of the board counts.</li>
+  <li><b>UNDER</b>: the vertical projection of the whole ROBOT, including BUMPERS, is entirely inside the vertical projection of its own ALLIANCE's FLOATING BOARD; the ROBOT does not qualify for HANG; and it is not in contact with the opponent's FLOATING BOARD.</li>
+  <li>Each ROBOT scores at most one ENDGAME state.</li>
+</ul>
+
+<h3>5.4 Point values</h3>
+<table>
+  <tr><th>Action</th><th class="n">AUTO</th><th class="n">TELEOP</th></tr>
+  <tr><td>CUBE scored in GOAL 1 (RIM 18 in.)</td><td class="n">2</td><td class="n">2</td></tr>
+  <tr><td>CUBE scored in GOAL 2 (RIM 38 in.)</td><td class="n">3</td><td class="n">3</td></tr>
+  <tr><td>CUBE scored in GOAL 3 (RIM 60 in.)</td><td class="n">5</td><td class="n">5</td></tr>
+  <tr><td>CUBE legally scored by its owning ALLIANCE in its VERTICAL GOAL (≥ 60 in.; G410)</td><td class="n">4</td><td class="n">4</td></tr>
+  <tr><td>ROBOT UNDER own FLOATING BOARD (end of MATCH)</td><td class="n">—</td><td class="n">3</td></tr>
+  <tr><td>ROBOT HANG on own FLOATING BOARD (end of MATCH)</td><td class="n">—</td><td class="n">10</td></tr>
+</table>
+<p>There is no separate AUTO bonus. AUTO and TELEOP points are recorded separately only for tiebreakers.</p>
+
+<h3>5.5 Ranking Points (Qualification MATCHES)</h3>
+<table>
+  <tr><th>RP</th><th>Requirement</th><th>Parameter (default)</th><th class="n">RP</th></tr>
+  <tr><td>WIN</td><td>Finish the MATCH with more MATCH points than the opponent</td><td>—</td><td class="n">3</td></tr>
+  <tr><td>TIE</td><td>Finish with the same number of MATCH points</td><td>—</td><td class="n">1</td></tr>
+  <tr><td><b>LEVELS RP</b></td><td>At the end of the MATCH, the ALLIANCE's HORIZONTAL GOALS hold at least x<sub>1</sub> CUBES in GOAL 1, <b>and</b> at least x<sub>2</sub> CUBES in its two GOAL 2s combined, <b>and</b> at least x<sub>3</sub> CUBES in GOAL 3</td><td>x<sub>1</sub> = 5, x<sub>2</sub> = 8, x<sub>3</sub> = 5</td><td class="n">1</td></tr>
+  <tr><td><b>SKYFORGE RP</b></td><td>At least y CUBES legally scored by the ALLIANCE in its own VERTICAL GOAL; opponent deliveries never contribute</td><td>y = 10</td><td class="n">1</td></tr>
+  <tr><td><b>BOARD RP</b></td><td>At least 2 ROBOTS HANG, <b>or</b> at least 1 ROBOT HANGs and at least 1 other ROBOT is UNDER (on the ALLIANCE's own FLOATING BOARD)</td><td>—</td><td class="n">1</td></tr>
+</table>
+<p>The maximum is 6 RP per MATCH. As in 2025, the thresholds may be raised for District Championship and Championship events.</p>
+<div class="note"><b>RP parameters (confirmed by the game designer).</b> x<sub>1</sub>/x<sub>2</sub>/x<sub>3</sub> are per-level minimums in the HORIZONTAL GOALS (GOAL 1 / both GOAL 2s / GOAL 3), and y is the minimum in the ALLIANCE's VERTICAL GOAL. For the BOARD RP, “1 HANG + 1 UNDER” was chosen over “+ 2 UNDER” because only one ROBOT of typical size fits fully under a board (Section 4.7).</div>
+
+<h3>5.6 Qualification ranking and playoff ties</h3>
+<table>
+  <tr><th>Order</th><th>Qualification sort criteria (after the 2025 Table 10-1 structure)</th></tr>
+  <tr><td>1st</td><td>Ranking Score (average RP)</td></tr>
+  <tr><td>2nd</td><td>Average ALLIANCE MATCH points, not including MINOR and MAJOR FOULS</td></tr>
+  <tr><td>3rd</td><td>Average ALLIANCE VERTICAL GOAL points</td></tr>
+  <tr><td>4th</td><td>Average ALLIANCE ENDGAME (HANG + UNDER) points</td></tr>
+  <tr><td>5th</td><td>Average ALLIANCE AUTO points</td></tr>
+  <tr><td>6th</td><td>Random sorting by FMS</td></tr>
+</table>
+<p>Playoff ties (a mock-specific order) are decided by, in turn: 1) more foul points awarded to the ALLIANCE (i.e. fouls committed by the opponent); 2) more AUTO points; 3) more ENDGAME points; 4) more VERTICAL GOAL points; 5) a replay.</p>
+
+<!-- ======================================================= 6 -->
+<h2 id="s6">6 Violations</h2>
+<p>These are unchanged from 2025 Table 6-3. Rules are called as perceived by a REFEREE, and each instance is assessed separately unless noted.</p>
+<table>
+  <tr><th>Penalty</th><th>Description</th></tr>
+  <tr><td>MINOR FOUL</td><td>2 points credited to the opponent's MATCH point total</td></tr>
+  <tr><td>MAJOR FOUL</td><td>6 points credited to the opponent's MATCH point total</td></tr>
+  <tr><td>YELLOW CARD</td><td>Issued by the Head REFEREE for egregious behaviour or rule violations. A second YELLOW CARD in the same tournament phase becomes a RED CARD.</td></tr>
+  <tr><td>RED CARD</td><td>The team is DISQUALIFIED for the MATCH</td></tr>
+  <tr><td>DISABLED</td><td>The ROBOT is commanded to deactivate all outputs for the rest of the MATCH</td></tr>
+  <tr><td>DISQUALIFIED</td><td>0 MATCH points and 0 RP in a Qualification MATCH, or 0 MATCH points for the ALLIANCE in a Playoff MATCH</td></tr>
+  <tr><td>VERBAL WARNING</td><td>A warning from event staff or the Head REFEREE</td></tr>
+  <tr><td>RP award / ineligibility</td><td>Some rules award an RP to the opponent (e.g. G419, G428) or make an ALLIANCE ineligible for one</td></tr>
+</table>
+<p>YELLOW/RED CARD application, carry-over and Playoff ALLIANCE-wide CARDS follow 2025 §6.6.1–6.6.3. Violation wording such as “MAJOR FOUL, and for every 3 seconds…” is interpreted as in 2025 Table 6-5.</p>
+
+<!-- ======================================================= 7 -->
+<h2 id="s7">7 Game rules (G)</h2>
+<h3>7.0 How to read this section</h3>
+<p><span class="legend-tag t-new">NEW</span> SKYFORGE-specific rule &nbsp; <span class="legend-tag t-mod">MOD</span> 2025 rule with changed content &nbsp; <span class="legend-tag t-inh">INH</span> inherited: the 2025 rule of the same number applies with these term substitutions:</p>
+<table>
+  <tr><th>2025 term</th><th>SKYFORGE term</th></tr>
+  <tr><td>CORAL, ALGAE, SCORING ELEMENT</td><td>CUBE</td></tr>
+  <tr><td>REEF / BRANCH / trough, NET, PROCESSOR</td><td>HORIZONTAL GOAL / THROAT, VERTICAL GOAL, (none)</td></tr>
+  <tr><td>CAGE, BARGE, BARGE ZONE</td><td>FLOATING BOARD (incl. HANG RAIL)</td></tr>
+  <tr><td>CORAL STATION, CHUTE, PROCESSOR AREA</td><td>INTRODUCTION POINT, IP ramp, FEEDER STATION</td></tr>
+  <tr><td>ROBOT STARTING LINE</td><td>STARTING ZONE</td></tr>
+  <tr><td>REEF ZONE (protected)</td><td>SAFE ZONE (protected)</td></tr>
+</table>
+
+<h3>7.1 – 7.2 Safety and conduct (G1xx, G2xx)</h3>
+<p><span class="legend-tag t-inh">INH</span> G101–G104 (personal safety) and G201–G210 and G212 are inherited unchanged.</p>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G211</span><span class="title">Egregious or exceptional violations.</span> The 2025 rule is inherited except its item H is replaced by: “a ROBOT climbing on or attaching to the opponent's FLOATING BOARD, or any ROBOT or team member climbing on a FLOATING BOARD support structure.” A ROBOT climbing on, being supported by, hanging from, or attaching to its <b>own</b> FLOATING BOARD or HANG RAIL in compliance with G418 is normal SKYFORGE gameplay and is not a G211 violation.</div>
+
+<h3>7.3 Pre-MATCH</h3>
+<div class="rule"><span class="legend-tag t-inh">INH</span> <span class="id">G301</span><span class="title">Be prompt.</span> <span class="id">G302</span><span class="title">You can't bring/use anything you want.</span></div>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G303</span><span class="title">Start your ROBOTS.</span> A ROBOT must meet all of the following MATCH-start requirements: A. it does not pose a hazard; B. it has passed inspection; C. if modified since, it is compliant with I104; D. <b>its BUMPERS are fully inside its own STARTING ZONE</b>; E. it is the only team-provided item left on the FIELD; F. it is not attached to, entangled with or suspended from any FIELD element; G. it is in its STARTING CONFIGURATION (R102, R104); H. it fully and solely supports <b>no more than 1 CUBE</b>.
+<span class="viol">Violation: as 2025 G303.</span></div>
+
+<h3>7.4 In-MATCH</h3>
+<h4>7.4.1 AUTO</h4>
+<div class="rule"><span class="legend-tag t-inh">INH</span> <span class="id">G401</span><span class="title">Behind the lines.</span> <span class="id">G402</span><span class="title">Let the ROBOT do its thing</span> (the HUMAN PLAYER feeding exception does not apply, because there is no introduction in AUTO).</div>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G403</span><span class="title">Limited AUTO opponent interaction.</span> In AUTO, a ROBOT whose BUMPERS are completely across the CENTER LINE, in the opponent's half, may not contact an opponent ROBOT, either directly or through a CUBE CONTROLLED by either ROBOT, regardless of who initiates contact.
+<span class="viol">Violation: MAJOR FOUL and VERBAL WARNING. YELLOW CARD for subsequent violations during the event.</span></div>
+<div class="rule new"><span class="legend-tag t-new">NEW</span> <span class="id">G404</span><span class="title">No introduction in AUTO.</span> In AUTO, a HUMAN PLAYER may not introduce a CUBE onto the FIELD or place one on an IP ramp.
+<span class="viol">Violation: MINOR FOUL per CUBE.</span></div>
+<div class="rule new"><span class="legend-tag t-new">NEW</span> <span class="id">G405</span><span class="title">No opponent FLOATING BOARD in AUTO.</span> In AUTO, a ROBOT may not contact the opponent's FLOATING BOARD or HANG RAIL.
+<span class="viol">Violation: MAJOR FOUL.</span></div>
+
+<h4>7.4.2 CUBES</h4>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G406</span><span class="title">ROBOTS: use CUBES as directed.</span> A ROBOT may not deliberately use a CUBE to ease or amplify a challenge associated with a FIELD element. Examples include LAUNCHING CUBES at ROBOTS; using CUBES to climb onto or stay on a FLOATING BOARD; wedging CUBES into or over an opponent THROAT; and stacking CUBES in front of an opponent IP.
+<span class="viol">Violation: MAJOR FOUL.</span></div>
+<div class="rule"><span class="legend-tag t-inh">INH</span> <span class="id">G407</span><span class="title">Keep CUBES in bounds</span> (scoring into a goal is not ejection). <span class="id">G408</span><span class="title">Don't abuse CUBES.</span></div>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G409</span><span class="title">4 CUBES at a time.</span> A ROBOT may not simultaneously CONTROL more than <b>4</b> CUBES, directly or through other objects. Bulldozing and deflecting are not CONTROL, as in 2025.
+<span class="viol">Violation: MINOR FOUL per additional CUBE. YELLOW CARD if excessive, e.g. CONTROL of 6 or more, or greater-than-MOMENTARY CONTROL of 5 more than twice in a MATCH.</span></div>
+<div class="rule new"><span class="legend-tag t-new">NEW</span> <span class="id">G410</span><span class="title">Shoot your VERTICAL GOAL from behind the RELEASE LINE.</span> A ROBOT may deliver a CUBE only into its own ALLIANCE's VERTICAL GOAL, and only when all of the following are true at the instant the CUBE leaves the ROBOT: A. the ROBOT's BUMPERS intersect its own LAUNCH ZONE; B. the entire CUBE is fieldward of the RELEASE LINE, at least 24 in. (610 mm) from the goal's opening plane; and C. after release, the CUBE is unsupported by any ROBOT or FIELD element until it passes through or misses the opening. A CUBE that rolls or bounces on the carpet, GOAL 1, ALLIANCE WALL, goal frame, or another ROBOT before reaching the opening is not a legal delivery.
+<span class="viol">Violation: MAJOR FOUL per CUBE. The CUBE is not scored and does not advance the SKYFORGE RP.</span></div>
+<div class="rule new"><span class="legend-tag t-new">NEW</span> <span class="id">G411</span><span class="title">No goal-tending.</span> A ROBOT may not A. break the vertical projection of an opponent THROAT above its RIM, or break the plane of that THROAT; B. break the plane of the opponent's VERTICAL GOAL opening or contact its frame; or C. contact an opponent's SCORE BIN or capture net.
+<span class="viol">Violation: MAJOR FOUL, and a further MAJOR FOUL for every 3 seconds the situation is not corrected.</span></div>
+<div class="rule new"><span class="legend-tag t-new">NEW</span> <span class="id">G412</span><span class="title">Scored CUBES stay scored.</span> No ROBOT or DRIVE TEAM member may remove a CUBE from any SCORE BIN or capture chute.
+<span class="viol">Violation: MAJOR FOUL per CUBE and YELLOW CARD. A CUBE that had already met its scoring criteria still counts.</span></div>
+
+<h4>7.4.3 ROBOT</h4>
+<div class="rule"><span class="legend-tag t-inh">INH</span> <span class="id">G413</span><span class="title">ROBOTS must be safe.</span> <span class="id">G414</span><span class="title">Keep your BUMPERS low.</span></div>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G415</span><span class="title">Expansion limits.</span> A ROBOT may not A. extend more than 18 in. (457 mm) beyond the vertical projection of its ROBOT PERIMETER, or B. extend more than <b>78 in. (1981 mm)</b> above the carpet. Over-expansion caused by damage and not used for strategic benefit is excepted, as in 2025.
+<span class="viol">Violation: MINOR FOUL, or MAJOR FOUL if used for strategic benefit, including if it impedes or enables a scoring action.</span></div>
+<div class="rule new"><span class="legend-tag t-new">NEW</span> <span class="id">G416</span><span class="title">Duck in the opponent's LAUNCH ZONE.</span> A ROBOT whose BUMPERS are partially or fully inside the <i>opponent's</i> LAUNCH ZONE may not extend more than 48 in. (1219 mm) above the carpet. This is based on 2019 G12 “Duck in the HAB ZONES”.
+<span class="viol">Violation: MINOR FOUL. MAJOR FOUL if the ROBOT blocks a CUBE LAUNCHED toward the opponent's VERTICAL GOAL.</span></div>
+<div class="rule"><span class="legend-tag t-inh">INH</span> <span class="id">G417</span><span class="title">Don't damage the FIELD</span> (2025 G416).</div>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G418</span><span class="title">Watch your FIELD interaction.</span> A ROBOT may not grab, grasp, attach to, become entangled with or suspend from any FIELD element <b>except its own ALLIANCE's FLOATING BOARD and HANG RAIL</b>. It may not contact any FLOATING BOARD support structure.
+<span class="viol">Violation: MAJOR FOUL, plus YELLOW CARD if REPEATED or longer than MOMENTARY. DISABLED if damage is likely.</span></div>
+<div class="rule new"><span class="legend-tag t-new">NEW</span> <span class="id">G419</span><span class="title">Opponent FLOATING BOARD is off-limits in ENDGAME.</span> During ENDGAME, a ROBOT may not contact the opponent's FLOATING BOARD or HANG RAIL, and its BUMPERS may not be partially or fully under the opponent's FLOATING BOARD.
+<span class="viol">Violation: MAJOR FOUL, and the opponent ALLIANCE is awarded the BOARD RP if it is a Qualification MATCH.</span></div>
+<div class="rule new"><span class="legend-tag t-new">NEW</span> <span class="id">G420</span><span class="title">Stay out of the opponent's SAFE ZONE.</span> A ROBOT's BUMPERS may not be partially or fully inside the opponent's SAFE ZONE.
+<span class="viol">Violation: MINOR FOUL, and a MAJOR FOUL for every 3 seconds the situation is not corrected. A MAJOR FOUL per CUBE CONTROLLED from inside it.</span></div>
+<div class="note">2025 G421 (“1 defender at a time”) is <b>not</b> used. SKYFORGE requires every ALLIANCE to work in the opponent's half, because GOAL 3 and the VERTICAL GOAL are there.</div>
+
+<h4>7.4.4 Opponent interaction</h4>
+<div class="rule"><span class="legend-tag t-inh">INH</span> <span class="id">G422</span>Stay out of other ROBOTS. <span class="id">G423</span>This isn't combat robotics. <span class="id">G424</span>Don't tip or entangle. <span class="id">G425</span>3-count on PINS. <span class="id">G426</span>Don't collude to shut down major parts of game play. Examples here include blocking all access to the opponent's GOAL 3 and VERTICAL GOAL together, or to all of their IPs.</div>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G427</span><span class="title">SAFE ZONE protection.</span> A ROBOT may not contact, directly or through a CUBE, an opponent ROBOT that is partially or fully inside that opponent's SAFE ZONE, regardless of who initiates contact.
+<span class="viol">Violation: MAJOR FOUL.</span></div>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G428</span><span class="title">FLOATING BOARD protection.</span> During ENDGAME, a ROBOT may not contact, directly or through a CUBE, an opponent ROBOT that is in contact with its own FLOATING BOARD or whose BUMPERS are partially or fully under it, regardless of who initiates contact.
+<span class="viol">Violation: MAJOR FOUL, and the opponent ALLIANCE is awarded the BOARD RP if it is a Qualification MATCH.</span></div>
+<div class="note">The LAUNCH ZONE is <b>not</b> protected, so defence there is legal within G416 and G422–G426. The opponent's GOAL 1 inside the zone is a deliberate obstacle.</div>
+
+<h4>7.4.5 Human</h4>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G429</span><span class="title">No wandering.</span> As in 2025, except that HUMAN PLAYERS must stay in their ALLIANCE's FEEDER STATION.
+<span class="viol">Violation: MINOR FOUL.</span></div>
+<div class="rule"><span class="legend-tag t-inh">INH</span> <span class="id">G430</span>Hands off the controls. <span class="id">G432</span>Humans: use CUBES as directed. <span class="id">G434</span>COACHES, CUBES are off-limits.</div>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G431</span><span class="title">Watch your reach.</span> A DRIVE TEAM member may not reach through an IP opening past the plane of the FIELD BORDER or ALLIANCE WALL.
+<span class="viol">Violation: MINOR FOUL.</span></div>
+<div class="rule mod"><span class="legend-tag t-mod">MOD</span> <span class="id">G433</span><span class="title">CUBE delivery.</span> CUBES may only be put onto the FIELD by a HUMAN PLAYER, during TELEOP, through one of their own ALLIANCE's IPs. At most one CUBE may be on each IP ramp at a time: the next CUBE may be placed only once the previous one is fully on the carpet.
+<span class="viol">Violation: MAJOR FOUL for entry by any other route. MINOR FOUL per extra CUBE on a ramp.</span></div>
+
+<h3>7.5 Post-MATCH</h3>
+<p><span class="legend-tag t-inh">INH</span> G501 Leave promptly.</p>
+
+<!-- ======================================================= 8 -->
+<h2 id="s8">8 ROBOT construction rules (R)</h2>
+<p>All 2025 R-rules apply unless changed below. That includes safety (R2xx), budget and fabrication (R3xx), BUMPERS (R4xx), motors and actuators (R5xx), power (R6xx), control, command and signals (R7xx), pneumatics (R8xx) and the OPERATOR CONSOLE (R9xx).</p>
+
+<h3>8.1 ROBOT size and expansion</h3>
+<table>
+  <tr><th>Rule</th><th>Limit</th><th>Source</th></tr>
+  <tr><td>R101 ROBOT PERIMETER must be fixed</td><td>Non-articulating, within the BUMPER ZONE</td><td><span class="legend-tag t-inh">INH</span> 2025</td></tr>
+  <tr><td>R102 STARTING CONFIGURATION – no overhang</td><td>Nothing outside the vertical projection of the ROBOT PERIMETER except BUMPERS and minor protrusions</td><td><span class="legend-tag t-inh">INH</span> 2025</td></tr>
+  <tr><td>R103 Weight</td><td>≤ 115 lb (52 kg), excluding BUMPERS and battery</td><td><span class="legend-tag t-inh">INH</span> 2025</td></tr>
+  <tr><td>R104 STARTING CONFIGURATION – max size</td><td>ROBOT PERIMETER ≤ 120 in. (3048 mm); height ≤ <b>42 in.</b> (1067 mm, 3 ft 6 in.)</td><td><span class="legend-tag t-inh">INH</span> 2025 (2019 allowed 4 ft)</td></tr>
+  <tr><td>R105 Extension limit</td><td>≤ <b>18 in.</b> (457 mm) beyond the vertical projection of the ROBOT PERIMETER, in any direction and on any number of sides</td><td><span class="legend-tag t-inh">INH</span> 2025 (2019 allowed 30 in.)</td></tr>
+  <tr><td>R106 Height limit</td><td>≤ <b>78 in.</b> (1981 mm, 6 ft 6 in.) above the carpet <b>at all times</b>. This is the GOAL 3 RIM (60 in.) plus two 9 in. CUBES: a ROBOT can raise a CUBE over GOAL 3 but has only about two CUBE heights of headroom above it.</td><td><span class="legend-tag t-new">NEW</span></td></tr>
+  <tr><td>Area limit (game rule G416)</td><td>≤ 48 in. (1219 mm) while its BUMPERS are in the opponent's LAUNCH ZONE</td><td><span class="legend-tag t-new">NEW</span> (2019 G12 concept)</td></tr>
+</table>
+<p>As in 2025, teams must show at inspection that the ROBOT can constrain itself to R105 and R106 (with hardware or software) in every configuration.</p>
+
+<figure class="fig-small">
+<svg viewBox="0 -92 224 104" role="img" aria-label="ROBOT envelope">
+  <line x1="4" y1="0" x2="220" y2="0" stroke="#111" stroke-width="0.8"/>
+  <polygon points="57,0 57,-78 123,-78 123,0" fill="#fee2e2" fill-opacity=".45" stroke="#b91c1c" stroke-width="0.6" stroke-dasharray="2 1.2"/>
+  <rect x="75" y="-42" width="30" height="42" fill="#e5e7eb" stroke="#374151" stroke-width="0.6" stroke-dasharray="2 1.2"/>
+  <rect x="75" y="-7" width="30" height="4" fill="#9ca3af" stroke="#374151" stroke-width="0.5"/>
+  <circle cx="80" cy="-2" r="2" fill="#111"/><circle cx="100" cy="-2" r="2" fill="#111"/>
+  <rect x="71.75" y="-5.75" width="3.25" height="3.25" fill="#d62828"/>
+  <rect x="105" y="-5.75" width="3.25" height="3.25" fill="#d62828"/>
+  <line x1="90" y1="-7" x2="90" y2="-64" stroke="#374151" stroke-width="1.2"/>
+  <line x1="90" y1="-64" x2="110" y2="-64" stroke="#374151" stroke-width="1.2"/>
+  <rect x="110" y="-69" width="9" height="9" fill="#f5c400" stroke="#8a6d00" stroke-width="0.4"/>
+  <rect x="110" y="-78" width="9" height="9" fill="#f5c400" stroke="#8a6d00" stroke-width="0.4"/>
+  <line x1="57" y1="-84" x2="75" y2="-84" stroke="#111" stroke-width="0.35" marker-start="url(#arS)" marker-end="url(#arS)"/>
+  <line x1="105" y1="-84" x2="123" y2="-84" stroke="#111" stroke-width="0.35" marker-start="url(#arS)" marker-end="url(#arS)"/>
+  <text x="66" y="-86" font-size="3.6" text-anchor="middle">18 in.</text>
+  <text x="114" y="-86" font-size="3.6" text-anchor="middle">18 in.</text>
+  <line x1="75" y1="-78" x2="75" y2="-88" stroke="#111" stroke-width="0.25"/><line x1="105" y1="-78" x2="105" y2="-88" stroke="#111" stroke-width="0.25"/>
+  <g stroke-width="0.35" stroke-dasharray="2 1.5">
+    <line x1="30" y1="-32" x2="160" y2="-32" stroke="#10b981"/>
+    <line x1="30" y1="-48" x2="160" y2="-48" stroke="#f59e0b"/>
+    <line x1="30" y1="-60" x2="160" y2="-60" stroke="#111"/>
+  </g>
+  <line x1="40" y1="0" x2="40" y2="-78" stroke="#111" stroke-width="0.35" marker-start="url(#arS)" marker-end="url(#arS)"/>
+  <text transform="translate(38 -39) rotate(-90)" font-size="3.6" text-anchor="middle">78 in. max (R106)</text>
+  <line x1="50" y1="0" x2="50" y2="-42" stroke="#111" stroke-width="0.35" marker-start="url(#arS)" marker-end="url(#arS)"/>
+  <text transform="translate(48 -21) rotate(-90)" font-size="3.4" text-anchor="middle">42 in. start</text>
+  <g font-size="3.6">
+    <text x="162" y="-31">32 in. board clearance</text>
+    <text x="162" y="-47">48 in. opp. LAUNCH ZONE</text>
+    <text x="162" y="-59">60 in. GOAL 3 RIM</text>
+    <text x="126" y="-76" fill="#b91c1c">legal envelope</text>
+    <text x="126" y="-72" fill="#b91c1c">(R105 + R106)</text>
+    <text x="90" y="-20" text-anchor="middle">STARTING</text>
+    <text x="90" y="-16" text-anchor="middle">CONFIG.</text>
+    <text x="90" y="-12" text-anchor="middle">(30 in. frame)</text>
+    <text x="112" y="7" font-size="3.2">BUMPER ZONE 2.5–5.75 in.</text>
+  </g>
+</svg>
+<figcaption>Figure 8-1 ROBOT envelope, side view, to scale, for an example 30 × 30 in. frame. The grey box is the STARTING CONFIGURATION (≤ 42 in. tall, within the ROBOT PERIMETER). The red dashed region is the envelope allowed during the MATCH: 18 in. beyond the perimeter and 78 in. total height. The example arm holds 2 CUBES above the GOAL 3 RIM height.</figcaption>
+</figure>
+
+<h3>8.2 BUMPERS</h3>
+<p><span class="legend-tag t-inh">INH</span> 2025 R401–R412, including the BUMPER ZONE from 2.5 in. to 5.75 in. (63–146 mm) above the floor, padding of at least 2.25 in. depth, a 4 in. maximum extension from the ROBOT PERIMETER, and interchangeable red/blue covers with team numbers. A CUBE (9 in.) is taller than the top of the BUMPER ZONE, so ROBOTS cannot pass over CUBES and can herd them.</p>
+
+<h3>8.3 CUBE-specific construction note</h3>
+<p><span class="legend-tag t-inh">INH</span> R204 (leave SCORING ELEMENTS at the FIELD) and R206 (don't damage SCORING ELEMENTS) apply to the foam CUBES. Gripping surfaces that cut or permanently dent foam are likely to breach R206 and G408.</p>
+
+<!-- ======================================================= 9 -->
+<h2 id="s9">9 Inspection &amp; tournament</h2>
+<p><span class="legend-tag t-inh">INH</span> 2025 Section 9 (Inspection &amp; Eligibility), Section 10 (Tournaments; ranking criteria replaced as in 5.6) and Section 11 (Event rules). Inspection additionally checks R106 (78 in.) and the ROBOT's ability to meet G416 (48 in.) on demand.</p>
+
+<!-- ======================================================= 10 -->
+<h2 id="s10">10 Design notes, tuning parameters &amp; open items</h2>
+<p><i>This section is not a rule. It records design intent and open questions so the game can be iterated.</i></p>
+
+<h3>10.1 Intended trade-offs</h3>
+<div class="intent">
+<ul>
+  <li><b>Go under or go tall.</b> A ROBOT that stays ≤ 32 in. can drive under both boards along the feeder side. It can also collect the 8 CUBES staged under the boards and score UNDER (3). It is naturally limited to GOAL 1 by placement (GOAL 1 needs a CUBE top of about 27 in.; GOAL 2 needs about 47 in.). A tall ROBOT reaches GOAL 2, GOAL 3 and the VERTICAL GOAL and can HANG (10), but has to go around the boards. A telescoping ROBOT that folds under 32 in. can have both, at the cost of mechanical complexity.</li>
+  <li><b>Near and far scoring.</b> GOAL 1 and both GOAL 2s are in the ALLIANCE's own half, near its IPs. GOAL 3 (5 pts) and the VERTICAL GOAL (4 pts, SKYFORGE RP) are in the opponent's half.</li>
+  <li><b>The blocker.</b> The opponent's GOAL 1 sits in your LAUNCH ZONE, directly under your VERTICAL GOAL. That stops ROBOTS driving up to the goal and gives the opponent's short ROBOTS a reason to be there. G416 lets them defend without being tall enough to block shots.</li>
+  <li><b>Precision over size.</b> The 11 in. THROAT for a 9 in. CUBE (±14.8° yaw) rewards controlled placement and makes LAUNCHING into HORIZONTAL GOALS possible but hard. The 30 in. hexagon is a larger target, but shots come from at least about 2 ft away.</li>
+  <li><b>Human-player risk.</b> IP-A and IP-B feed the protected SAFE ZONE. IP-C is faster to reach from mid-field, but opponents can take its CUBES.</li>
+</ul>
+</div>
+
+<h3>10.2 Tuning parameters (defaults in this draft)</h3>
+<table>
+  <tr><th>Parameter</th><th class="n">Default</th><th>Affects</th></tr>
+  <tr><td>CUBE edge</td><td class="n">9.0 in.</td><td>Capacity of 4, THROAT clearance, 78 in. height rule</td></tr>
+  <tr><td>THROAT size</td><td class="n">11.0 in.</td><td>Placement tolerance; whether LAUNCHING into HORIZONTAL GOALS works</td></tr>
+  <tr><td>RIM heights G1 / G2 / G3</td><td class="n">18 / 38 / 60 in.</td><td>Under-board ROBOT capability, height limit</td></tr>
+  <tr><td>Board clearance</td><td class="n">32 in.</td><td>Main architecture trade-off</td></tr>
+  <tr><td>Board legs</td><td class="n">108 × 84 in.</td><td>Number of ROBOTS fully UNDER (1)</td></tr>
+  <tr><td>VERTICAL GOAL size</td><td class="n">30 in. across flats</td><td>Shooting difficulty</td></tr>
+  <tr><td>LAUNCH ZONE</td><td class="n">90 × 72 in.</td><td>Shot distance and crowding</td></tr>
+  <tr><td>Points G1 / G2 / G3 / VG</td><td class="n">2 / 3 / 5 / 4</td><td>Value of tall vs short ROBOTS</td></tr>
+  <tr><td>UNDER / HANG</td><td class="n">3 / 10</td><td>Value of endgame and of going under</td></tr>
+  <tr><td>RP x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, y</td><td class="n">5, 8, 5, 10</td><td>RP difficulty; needs simulation</td></tr>
+  <tr><td>CONTROL limit</td><td class="n">4</td><td>Cycle size</td></tr>
+  <tr><td>Reserve CUBES per ALLIANCE</td><td class="n">26</td><td>HP throughput vs FIELD supply</td></tr>
+</table>
+
+<h3>10.3 Open items and assumptions (not verified)</h3>
+<ul>
+  <li>No prototypes yet. Foam compression may change the real THROAT tolerance; the ±14.8° figure assumes a rigid cube with no tilt. Also untested: whether the 40° ROOF sheds foam CUBES, how CUBES bounce off the hexagon edges, the IP ramp exit speed and CUBE mass.</li>
+  <li>RP thresholds and point values are estimates, not results from a cycle-time or match simulation.</li>
+  <li>The FLOATING BOARD design load (≥ 600 lb) and its cantilever frame have not been engineered.</li>
+  <li>DRIVER STATION widths (66 in.), the AprilTag layout and FMS sensor details are placeholders.</li>
+  <li>Assumptions taken from the sketch: each triangle belongs to the ALLIANCE whose half it is in; each hexagon is the goal of the ALLIANCE whose colour it is drawn in, i.e. the one at the opponent's wall; standard 54 × 27 ft FIELD proportions replace the sketch proportions.</li>
+</ul>
+
+</main>
+</body>
+</html>
