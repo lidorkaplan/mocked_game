@@ -696,8 +696,23 @@
 </table>
 <p>CUBES that leave the FIELD other than by scoring are returned by FIELD STAFF, when it is safe, to the FEEDER STATION of the ALLIANCE whose half they left from.</p>
 
-<h3>4.11 Vision targets</h3>
-<p>AprilTags (36h11 family, 6.5 in.) are planned on each HORIZONTAL GOAL face, around each VERTICAL GOAL, at each IP and on the FLOATING BOARD support. IDs and exact poses are <i>TBD</i> in this draft.</p>
+<h3>4.11 AprilTags</h3>
+<p>AprilTags follow the 2025 and 2026 FRC specification. There are 22 unique markers, IDs 1&ndash;22, from the 36h11 family. Each tag is 8.125 in. (20.64 cm) square including its white border, with a 6.5 in. (16.51 cm) black square, and is centred on a 10.5 in. (26.67 cm) square polycarbonate panel with an identifying text label. Worn tags are repaired with gaffer tape. As in 2026, several elements carry two tags (one centred and one offset), and the FLOATING BOARDS carry bracket-mounted tags, similar to the 2026 TRENCH.</p>
+<table>
+  <tr><th class="n">ID red / blue</th><th>Location (on each ALLIANCE's end)</th><th class="n">Centre X, Y (red), Z &ndash; in.</th><th>Faces</th></tr>
+  <tr><td class="n">1 / 12</td><td>IP-A, on the ALLIANCE WALL above the opening</td><td class="n">312, 0, 21.75</td><td>Down-field</td></tr>
+  <tr><td class="n">2 / 13</td><td>IP-B, on the FEEDER-SIDE border beside the opening</td><td class="n">324, 72, 10</td><td>Across the FIELD</td></tr>
+  <tr><td class="n">3 / 14</td><td>IP-C, on the FEEDER-SIDE border beside the opening</td><td class="n">324, 192, 10</td><td>Across the FIELD</td></tr>
+  <tr><td class="n">4 / 15</td><td>ALLIANCE WALL below the opponent's VERTICAL GOAL, centred</td><td class="n">165, 0, 44.25</td><td>Down-field</td></tr>
+  <tr><td class="n">5 / 16</td><td>ALLIANCE WALL below the opponent's VERTICAL GOAL, offset</td><td class="n">141, 0, 44.25</td><td>Down-field</td></tr>
+  <tr><td class="n">6 / 17</td><td>GOAL 1, field face</td><td class="n">165, 24, 6.5</td><td>Down-field</td></tr>
+  <tr><td class="n">7 / 18</td><td>GOAL 2 near, field face</td><td class="n">24, 120, 21.75</td><td>Across the FIELD</td></tr>
+  <tr><td class="n">8 / 19</td><td>Opponent's GOAL 3 (in this half), field face</td><td class="n">24, 192, 44.25</td><td>Across the FIELD</td></tr>
+  <tr><td class="n">9 / 20</td><td>GOAL 2 centre, field face</td><td class="n">24, 270, 21.75</td><td>Across the FIELD</td></tr>
+  <tr><td class="n">10 / 21</td><td>FLOATING BOARD bracket, wall side (12 in. inboard of the HANG RAIL)</td><td class="n">305.5, 259.4, 39.75</td><td>Toward the field, perpendicular to the HANG RAIL</td></tr>
+  <tr><td class="n">11 / 22</td><td>FLOATING BOARD bracket, centre side</td><td class="n">277.5, 295.4, 39.75</td><td>Toward the field, perpendicular to the HANG RAIL</td></tr>
+</table>
+<p>Blue tag positions are the red positions mirrored across the CENTER LINE (Y &rarr; 648 &minus; Y). The tag patterns are <b>not</b> mirrored, since a mirrored AprilTag does not decode. The same poses are published as a WPILib AprilTagFieldLayout JSON file with the field CAD. That file uses the WPILib convention: origin at the blue ALLIANCE WALL corner, +x down-field, +y toward the FEEDER-SIDE, +z up, in metres.</p>
 
 <!-- ======================================================= 5 -->
 <h2 id="s5">5 MATCH play &amp; scoring</h2>
@@ -965,7 +980,7 @@
   <li>No prototypes yet. Foam compression may change the real THROAT tolerance; the ±14.8° figure assumes a rigid cube with no tilt. Also untested: whether the 40° ROOF sheds foam CUBES, how CUBES bounce off the hexagon edges, the IP ramp exit speed and CUBE mass.</li>
   <li>RP thresholds and point values are estimates, not results from a cycle-time or match simulation.</li>
   <li>The FLOATING BOARD design load (≥ 600 lb) and its cantilever frame have not been engineered.</li>
-  <li>DRIVER STATION widths (66 in.), the AprilTag layout and FMS sensor details are placeholders.</li>
+  <li>DRIVER STATION widths (66 in.) and FMS sensor details are placeholders. AprilTag poses are defined (4.11), but their visibility has not been checked with real cameras.</li>
   <li>Assumptions taken from the sketch: each triangle belongs to the ALLIANCE whose half it is in; each hexagon is the goal of the ALLIANCE whose colour it is drawn in, i.e. the one at the opponent's wall; standard 54 × 27 ft FIELD proportions replace the sketch proportions.</li>
 </ul>
 
