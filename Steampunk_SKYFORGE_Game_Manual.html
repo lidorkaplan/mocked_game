@@ -87,7 +87,7 @@
       <rect x="198" y="-26" width="66" height="26" style="fill:var(--own);fill-opacity:.14;stroke:var(--own)" stroke-width="0.8"/>
       <!-- FEEDER STATION (HUMAN PLAYER area, outside FIELD) -->
       <path d="M264,-26 H380 V204 H324 V0 H264 Z" style="fill:var(--own);fill-opacity:.07;stroke:var(--own)" stroke-width="0.8" stroke-dasharray="3 2"/>
-      <!-- reserve CUBES (26) -->
+      <!-- reserve CUBES (80 per ALLIANCE; drawn schematically) -->
       <use href="#cube" x="349.5" y="5.5"/><use href="#cube" x="365.5" y="5.5"/>
       <use href="#cube" x="349.5" y="20.5"/><use href="#cube" x="365.5" y="20.5"/>
       <use href="#cube" x="349.5" y="35.5"/><use href="#cube" x="365.5" y="35.5"/>
@@ -684,15 +684,15 @@
 </div>
 
 <h3>4.10 CUBE staging</h3>
-<p>FIELD STAFF stage <b>116 CUBES</b> before each MATCH. Coordinates are CUBE centres for the red half; for blue, use Y → 648 − Y.</p>
+<p>FIELD STAFF stage <b>224 CUBES</b> before each MATCH. Coordinates are CUBE centres for the red half; for blue, use Y → 648 − Y.</p>
 <table>
   <tr><th>Location</th><th class="n">Per ALLIANCE half</th><th class="n">Total</th><th>Red-half positions (X; Y), in.</th></tr>
   <tr><td>CENTER LINE rows</td><td class="n">14</td><td class="n">28</td><td>X = 84, 108, 132, 156, 180, 204, 228; Y = 288, 312 (blue: 336, 360)</td></tr>
   <tr><td>SAFE ZONE lane</td><td class="n">10</td><td class="n">20</td><td>X = 276, 300; Y = 24, 48, 72, 96, 120 (a 19 in. corridor at X &gt; 304.5 is left clear for IP-A and IP-B)</td></tr>
   <tr><td>Beside IP-C</td><td class="n">4</td><td class="n">8</td><td>X = 276, 300; Y = 168, 192</td></tr>
   <tr><td>Under FLOATING BOARD</td><td class="n">4</td><td class="n">8</td><td>X = 290, 310; Y = 290, 310</td></tr>
-  <tr><td>FEEDER STATION reserve (includes optional preloads)</td><td class="n">26</td><td class="n">52</td><td>Outside the FIELD. Each ROBOT may preload 1 taken from its ALLIANCE's reserve (G303-H).</td></tr>
-  <tr><th>Total</th><th class="n">58</th><th class="n">116</th><th>64 on the FIELD at MATCH start (plus up to 6 preloaded)</th></tr>
+  <tr><td>FEEDER STATION reserve (includes optional preloads)</td><td class="n">80</td><td class="n">160</td><td>Outside the FIELD. Each ROBOT may preload 1 taken from its ALLIANCE's reserve (G303-H).</td></tr>
+  <tr><th>Total</th><th class="n">112</th><th class="n">224</th><th>64 on the FIELD at MATCH start (plus up to 6 preloaded)</th></tr>
 </table>
 <p>CUBES that leave the FIELD other than by scoring are returned by FIELD STAFF, when it is safe, to the FEEDER STATION of the ALLIANCE whose half they left from.</p>
 
@@ -758,12 +758,12 @@
   <tr><th>RP</th><th>Requirement</th><th>Parameter (default)</th><th class="n">RP</th></tr>
   <tr><td>WIN</td><td>Finish the MATCH with more MATCH points than the opponent</td><td>—</td><td class="n">3</td></tr>
   <tr><td>TIE</td><td>Finish with the same number of MATCH points</td><td>—</td><td class="n">1</td></tr>
-  <tr><td><b>LEVELS RP</b></td><td>At the end of the MATCH, the ALLIANCE's HORIZONTAL GOALS hold at least x<sub>1</sub> CUBES in GOAL 1, <b>and</b> at least x<sub>2</sub> CUBES in its two GOAL 2s combined, <b>and</b> at least x<sub>3</sub> CUBES in GOAL 3</td><td>x<sub>1</sub> = 5, x<sub>2</sub> = 8, x<sub>3</sub> = 5</td><td class="n">1</td></tr>
-  <tr><td><b>SKYFORGE RP</b></td><td>At least y CUBES legally scored by the ALLIANCE in its own VERTICAL GOAL; opponent deliveries never contribute</td><td>y = 10</td><td class="n">1</td></tr>
+  <tr><td><b>LEVELS RP</b></td><td>At the end of the MATCH, the ALLIANCE's HORIZONTAL GOALS hold at least x<sub>1</sub> CUBES in GOAL 1, <b>and</b> at least x<sub>2</sub> CUBES in its two GOAL 2s combined, <b>and</b> at least x<sub>3</sub> CUBES in GOAL 3</td><td>x<sub>1</sub> = 22, x<sub>2</sub> = 12, x<sub>3</sub> = 18</td><td class="n">1</td></tr>
+  <tr><td><b>SKYFORGE RP</b></td><td>At least y CUBES legally scored by the ALLIANCE in its own VERTICAL GOAL; opponent deliveries never contribute</td><td>y = 30</td><td class="n">1</td></tr>
   <tr><td><b>BOARD RP</b></td><td>At least 2 ROBOTS HANG, <b>or</b> at least 1 ROBOT HANGs and at least 1 other ROBOT is UNDER (on the ALLIANCE's own FLOATING BOARD)</td><td>—</td><td class="n">1</td></tr>
 </table>
 <p>The maximum is 6 RP per MATCH. As in 2025, the thresholds may be raised for District Championship and Championship events.</p>
-<div class="note"><b>RP parameters (confirmed by the game designer).</b> x<sub>1</sub>/x<sub>2</sub>/x<sub>3</sub> are per-level minimums in the HORIZONTAL GOALS (GOAL 1 / both GOAL 2s / GOAL 3), and y is the minimum in the ALLIANCE's VERTICAL GOAL. For the BOARD RP, “1 HANG + 1 UNDER” was chosen over “+ 2 UNDER” because only one ROBOT of typical size fits fully under a board (Section 4.7).</div>
+<div class="note"><b>RP parameters (confirmed by the game designer).</b> x<sub>1</sub>/x<sub>2</sub>/x<sub>3</sub> are per-level minimums in the HORIZONTAL GOALS (GOAL 1 / both GOAL 2s / GOAL 3), and y is the minimum in the ALLIANCE's VERTICAL GOAL. For the BOARD RP, “1 HANG + 1 UNDER” was chosen over “+ 2 UNDER” because only one ROBOT of typical size fits fully under a board (Section 4.7). These are harder draft scoring thresholds, not a promise of particular event success rates. See <a href="#balance-evidence">Section 10.4</a> for the saved-model evidence and its limitations.</div>
 
 <h3>5.6 Qualification ranking and playoff ties</h3>
 <table>
@@ -970,19 +970,31 @@
   <tr><td>LAUNCH ZONE</td><td class="n">90 × 72 in.</td><td>Shot distance and crowding</td></tr>
   <tr><td>Points G1 / G2 / G3 / VG</td><td class="n">2 / 3 / 5 / 4</td><td>Value of tall vs short ROBOTS</td></tr>
   <tr><td>UNDER / HANG</td><td class="n">3 / 10</td><td>Value of endgame and of going under</td></tr>
-  <tr><td>RP x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, y</td><td class="n">5, 8, 5, 10</td><td>RP difficulty; needs simulation</td></tr>
+  <tr><td>RP x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, y</td><td class="n">22, 12, 18, 30</td><td>Harder scoring RP; saved-model check in 10.4</td></tr>
   <tr><td>CONTROL limit</td><td class="n">4</td><td>Cycle size</td></tr>
-  <tr><td>Reserve CUBES per ALLIANCE</td><td class="n">26</td><td>HP throughput vs FIELD supply</td></tr>
+  <tr><td>Reserve CUBES per ALLIANCE</td><td class="n">80</td><td>HP throughput vs FIELD supply</td></tr>
 </table>
 
 <h3>10.3 Open items and assumptions (not verified)</h3>
 <ul>
   <li>No prototypes yet. Foam compression may change the real THROAT tolerance; the ±14.8° figure assumes a rigid cube with no tilt. Also untested: whether the 40° ROOF sheds foam CUBES, how CUBES bounce off the hexagon edges, the IP ramp exit speed and CUBE mass.</li>
-  <li>RP thresholds and point values are estimates, not results from a cycle-time or match simulation.</li>
+  <li>RP thresholds and the reserve size are model-informed draft settings, not prototype or playtest results. The saved-match check in 10.4 does not model strategy adapting to the new thresholds or establish rates for a particular competition week. Point values are still estimates.</li>
   <li>The FLOATING BOARD design load (≥ 600 lb) and its cantilever frame have not been engineered.</li>
   <li>DRIVER STATION widths (66 in.) and FMS sensor details are placeholders. AprilTag poses are defined (4.11), but their visibility has not been checked with real cameras.</li>
   <li>Assumptions taken from the sketch: each triangle belongs to the ALLIANCE whose half it is in; each hexagon is the goal of the ALLIANCE whose colour it is drawn in, i.e. the one at the opponent's wall; standard 54 × 27 ft FIELD proportions replace the sketch proportions.</li>
 </ul>
+
+<h3 id="balance-evidence">10.4 Balance revision and saved-model evidence</h3>
+<p><b>Retained rebalance.</b> Compared with the original draft, LEVELS increases from 5 / 8 / 5 to <b>22 / 12 / 18</b> CUBES, SKYFORGE from 10 to <b>30</b>, and the FEEDER STATION reserve from 26 to <b>80 per ALLIANCE</b>, including optional preloads. The total supply increases from 116 to <b>224 CUBES</b>; the 64 loose starting CUBES and their locations are unchanged (4.10). This makes the scoring bonuses harder while giving HUMAN PLAYERS more supply to sustain cycling. BOARD criteria, point values and the CONTROL limit are unchanged.</p>
+<p><b>Evidence: model, not measured play.</b> The existing local SKYFORGE output <code>sim/out/event_population/matches.csv</code> contains 2,000 MATCHES (4,000 ALLIANCE-MATCHES). Its companion configuration uses seed 3 and a robot-tier mix of 0.5% world, 7.5% elite, 22% strong, 40% average and 30% rookie. The table below applies the current thresholds to those saved final goal and endgame counts. The saved RP flags do not consistently match the current thresholds, so they are not used as the new success rates. <b>No simulation was rerun for this revision.</b> These are fixed-trajectory checks, not predictions of how ROBOTS would change their strategy.</p>
+<table>
+  <tr><th>Bonus</th><th>Current requirement</th><th class="n">Saved ALLIANCE-MATCHES passing</th><th class="n">Rate</th></tr>
+  <tr><td>LEVELS</td><td>G1 &ge; 22, combined G2 &ge; 12, G3 &ge; 18</td><td class="n">127 / 4,000</td><td class="n">3.2%</td></tr>
+  <tr><td>SKYFORGE</td><td>VG &ge; 30</td><td class="n">1,976 / 4,000</td><td class="n">49.4%</td></tr>
+  <tr><td>BOARD</td><td>2 HANG, or 1 HANG + 1 other UNDER</td><td class="n">2,864 / 4,000</td><td class="n">71.6%</td></tr>
+</table>
+<p><b>Historical context.</b> The <a href="https://github.com/frc1577/strategic-design/blob/89d00c7/.github/skills/frc-tba-rp-foul-stats/references/weekly_rates_2016_2026.md">TBA-derived global weekly bonus rates</a> illustrate why bonuses need not be equally easy: 2025 Coral was 5.6% in Week 1 and 19.9% in Week 6; 2024 Melody was 22.3% and 51.8%, respectively. The unchanged BOARD model rate is closer to 2025 Barge at DCMP (71.1%) than at regular events (38.7% in Week 1; 54.0% in Week 6). LEVELS is harder than these early-season examples and BOARD remains comparatively accessible. This supports a hard / medium / accessible bonus structure, <b>not</b> a claim that the mock population matches any particular week or event level. Rates also depend on alliance composition and winning versus losing.</p>
+<p><b>CUBE availability.</b> The saved event-population rows account for 77 reserve CUBES after three preloads per ALLIANCE, consistent with the 80-CUBE reserve. Reachable supply (reserve plus reachable loose and in-flight CUBES, not just the starting floor CUBES) was exhausted in 9 / 4,000 ALLIANCE-MATCHES (0.225%), first occurring 131&ndash;147 s into the 150 s MATCH, during ENDGAME. This supports retaining the larger reserve for that model population, but does not prove shortages are eliminated: saved strong-alliance studies still include late supply exhaustion. There is no matched before/after run here and no guarantee that 80 reserve CUBES suffice for every elite ALLIANCE.</p>
 
 </main>
 </body>
